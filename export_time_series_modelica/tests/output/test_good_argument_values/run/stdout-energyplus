@@ -1,17 +1,19 @@
 EnergyPlus Starting
-EnergyPlus, Version 9.3.0-baff08990c, YMD=2020.09.22 11:31
+EnergyPlus, Version 9.3.0-baff08990c, YMD=2020.09.28 15:47
 Initializing Response Factors
-Calculating CTFs for "EXTERIOR DOOR", Construction # 1
-Calculating CTFs for "EXTERIOR ROOF", Construction # 2
-Calculating CTFs for "EXTERIOR WALL", Construction # 3
-Calculating CTFs for "INTERIOR PARTITION", Construction # 8
-Calculating CTFs for "SLAB", Construction # 10
+Calculating CTFs for "INTERIORFURNISHINGS", Construction # 1
+Calculating CTFs for "PLENUM ACOUSTICAL TILE", Construction # 2
+Calculating CTFs for "TYPICAL IEAD ROOF R-20.83", Construction # 3
+Calculating CTFs for "TYPICAL INSULATED CARPETED 6IN SLAB FLOOR", Construction # 5
+Calculating CTFs for "TYPICAL INSULATED METAL DOOR R-1.43", Construction # 7
+Calculating CTFs for "TYPICAL INSULATED STEEL FRAMED EXTERIOR WALL R-15.63", Construction # 8
+Calculating CTFs for "TYPICAL INTERIOR CEILING", Construction # 9
+Calculating CTFs for "TYPICAL INTERIOR WALL", Construction # 13
 Initializing Window Optical Properties
 Initializing Solar Calculations
 Allocate Solar Module Arrays
 Initializing Zone and Enclosure Report Variables
 Initializing Surface (Shading) Report Variables
-Computing Interior Solar Absorption Factors
 Determining Shadowing Combinations
 Computing Window Shade Absorption Factors
 Proceeding with Initializing Solar Calculations
@@ -34,20 +36,28 @@ Calculate Inside Surface Heat Balance
 Calculate Air Heat Balance
 Initializing HVAC
 Warming up
-Calculating Detailed Daylighting Factors, Start Date=01/21
-Warming up
-Warming up
-Performing Zone Sizing Simulation
-...for Sizing Period: #1 SIZING PERIOD DESIGN DAY 1
-Warming up
 Calculating Detailed Daylighting Factors, Start Date=07/21
 Warming up
+Warming up
+Warming up
+Warming up
+Warming up
 Performing Zone Sizing Simulation
-...for Sizing Period: #2 SIZING PERIOD DESIGN DAY 2
+...for Sizing Period: #1 DENVER-AURORA-BUCKLEY.AFB_CO_USA ANN CLG .4% CONDNS DB=>MWB
+Warming up
+Calculating Detailed Daylighting Factors, Start Date=12/21
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Warming up
+Performing Zone Sizing Simulation
+...for Sizing Period: #2 DENVER-AURORA-BUCKLEY.AFB_CO_USA ANN HTG 99.6% CONDNS DB
 Calculating System sizing
-...for Sizing Period: #1 SIZING PERIOD DESIGN DAY 1
+...for Sizing Period: #1 DENVER-AURORA-BUCKLEY.AFB_CO_USA ANN CLG .4% CONDNS DB=>MWB
 Calculating System sizing
-...for Sizing Period: #2 SIZING PERIOD DESIGN DAY 2
+...for Sizing Period: #2 DENVER-AURORA-BUCKLEY.AFB_CO_USA ANN HTG 99.6% CONDNS DB
 Adjusting Air System Sizing
 Adjusting Standard 62.1 Ventilation Sizing
 Initializing Simulation
@@ -55,233 +65,173 @@ Reporting Surfaces
 Beginning Primary Simulation
 Initializing New Environment Parameters
 Warming up {1}
-Calculating Detailed Daylighting Factors, Start Date=01/21
-Calculating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
-Warming up {2}
-Warming up {3}
-Starting Simulation at 01/21 for SIZING PERIOD DESIGN DAY 1
-Initializing New Environment Parameters
-Warming up {1}
-Calculating Detailed Daylighting Factors, Start Date=07/21
-Calculating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
-Warming up {2}
-Starting Simulation at 07/21 for SIZING PERIOD DESIGN DAY 2
-Initializing New Environment Parameters
-Warming up {1}
 Calculating Detailed Daylighting Factors, Start Date=01/01
-Calculating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Warming up {2}
 Warming up {3}
+Warming up {4}
+Warming up {5}
+Warming up {6}
+Warming up {7}
+Warming up {8}
+Warming up {9}
 Starting Simulation at 01/01/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=01/08/2006
 Updating Detailed Daylighting Factors, Start Date=01/08
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 01/08/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=01/15/2006
 Updating Detailed Daylighting Factors, Start Date=01/15
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 01/15/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=01/22/2006
 Updating Detailed Daylighting Factors, Start Date=01/22
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 01/22/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=01/29/2006
 Updating Detailed Daylighting Factors, Start Date=01/29
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 01/29/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=02/05/2006
 Updating Detailed Daylighting Factors, Start Date=02/05
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 02/05/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=02/12/2006
 Updating Detailed Daylighting Factors, Start Date=02/12
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 02/12/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=02/19/2006
 Updating Detailed Daylighting Factors, Start Date=02/19
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 02/19/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=02/26/2006
 Updating Detailed Daylighting Factors, Start Date=02/26
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 02/26/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=03/05/2006
 Updating Detailed Daylighting Factors, Start Date=03/05
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 03/05/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=03/12/2006
 Updating Detailed Daylighting Factors, Start Date=03/12
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 03/12/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=03/19/2006
 Updating Detailed Daylighting Factors, Start Date=03/19
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 03/19/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=03/26/2006
 Updating Detailed Daylighting Factors, Start Date=03/26
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 03/26/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=04/02/2006
 Updating Detailed Daylighting Factors, Start Date=04/02
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 04/02/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=04/09/2006
 Updating Detailed Daylighting Factors, Start Date=04/09
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 04/09/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=04/16/2006
 Updating Detailed Daylighting Factors, Start Date=04/16
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 04/16/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=04/23/2006
 Updating Detailed Daylighting Factors, Start Date=04/23
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 04/23/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=04/30/2006
 Updating Detailed Daylighting Factors, Start Date=04/30
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 04/30/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=05/07/2006
 Updating Detailed Daylighting Factors, Start Date=05/07
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 05/07/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=05/14/2006
 Updating Detailed Daylighting Factors, Start Date=05/14
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 05/14/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=05/21/2006
 Updating Detailed Daylighting Factors, Start Date=05/21
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 05/21/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=05/28/2006
 Updating Detailed Daylighting Factors, Start Date=05/28
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 05/28/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=06/04/2006
 Updating Detailed Daylighting Factors, Start Date=06/04
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 06/04/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=06/11/2006
 Updating Detailed Daylighting Factors, Start Date=06/11
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 06/11/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=06/18/2006
 Updating Detailed Daylighting Factors, Start Date=06/18
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 06/18/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=06/25/2006
 Updating Detailed Daylighting Factors, Start Date=06/25
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 06/25/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=07/02/2006
 Updating Detailed Daylighting Factors, Start Date=07/02
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 07/02/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=07/09/2006
 Updating Detailed Daylighting Factors, Start Date=07/09
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 07/09/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=07/16/2006
 Updating Detailed Daylighting Factors, Start Date=07/16
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 07/16/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=07/23/2006
 Updating Detailed Daylighting Factors, Start Date=07/23
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 07/23/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=07/30/2006
 Updating Detailed Daylighting Factors, Start Date=07/30
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 07/30/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=08/06/2006
 Updating Detailed Daylighting Factors, Start Date=08/06
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 08/06/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=08/13/2006
 Updating Detailed Daylighting Factors, Start Date=08/13
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 08/13/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=08/20/2006
 Updating Detailed Daylighting Factors, Start Date=08/20
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 08/20/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=08/27/2006
 Updating Detailed Daylighting Factors, Start Date=08/27
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 08/27/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=09/03/2006
 Updating Detailed Daylighting Factors, Start Date=09/03
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 09/03/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=09/10/2006
 Updating Detailed Daylighting Factors, Start Date=09/10
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 09/10/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=09/17/2006
 Updating Detailed Daylighting Factors, Start Date=09/17
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 09/17/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=09/24/2006
 Updating Detailed Daylighting Factors, Start Date=09/24
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 09/24/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=10/01/2006
 Updating Detailed Daylighting Factors, Start Date=10/01
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 10/01/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=10/08/2006
 Updating Detailed Daylighting Factors, Start Date=10/08
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 10/08/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=10/15/2006
 Updating Detailed Daylighting Factors, Start Date=10/15
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 10/15/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=10/22/2006
 Updating Detailed Daylighting Factors, Start Date=10/22
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 10/22/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=10/29/2006
 Updating Detailed Daylighting Factors, Start Date=10/29
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 10/29/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=11/05/2006
 Updating Detailed Daylighting Factors, Start Date=11/05
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 11/05/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=11/12/2006
 Updating Detailed Daylighting Factors, Start Date=11/12
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 11/12/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=11/19/2006
 Updating Detailed Daylighting Factors, Start Date=11/19
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 11/19/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=11/26/2006
 Updating Detailed Daylighting Factors, Start Date=11/26
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 11/26/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=12/03/2006
 Updating Detailed Daylighting Factors, Start Date=12/03
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 12/03/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=12/10/2006
 Updating Detailed Daylighting Factors, Start Date=12/10
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 12/10/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=12/17/2006
 Updating Detailed Daylighting Factors, Start Date=12/17
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 12/17/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=12/24/2006
 Updating Detailed Daylighting Factors, Start Date=12/24
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Continuing Simulation at 12/24/2006 for RUN PERIOD 1
 Updating Shadowing Calculations, Start Date=12/31/2006
 Updating Detailed Daylighting Factors, Start Date=12/31
-Updating Daylighting Coefficients (Map Points), Zone=THERMAL ZONE 1
 Writing tabular output file results using HTML format.
 Computing Life Cycle Costs and Reporting
 Writing final SQL reports
-EnergyPlus Run Time=00hr 00min 13.03sec
+EnergyPlus Run Time=00hr 01min  1.44sec
 EnergyPlus Completed Successfully.

@@ -1,8 +1,8 @@
 {
-   "created_at" : "20200922T163128Z",
-   "hash" : "2FAADF29",
+   "created_at" : "20200928T214711Z",
+   "hash" : "9356011A",
    "seed_file" : "C:/Users/User/Documents/GitHub/OpenStudio-measures/lib/measures/export_time_series_modelica/tests/output/test_good_argument_values/example_model.osm",
    "steps" : [],
-   "updated_at" : "20200922T163128Z",
+   "updated_at" : "20200928T214711Z",
    "weather_file" : "C:/Users/User/Documents/GitHub/OpenStudio-measures/lib/measures/export_time_series_modelica/tests/USA_CO_Golden-NREL.724666_TMY3.epw"
 }

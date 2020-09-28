@@ -1,6 +1,6 @@
 # insert your copyright here
 
-# require 'openstudio' ##AA commented out
+#require 'openstudio' ##AA commented out 
 require 'openstudio/measure/ShowRunnerOutput'
 require 'minitest/autorun'
 require_relative '../measure.rb'
@@ -43,12 +43,14 @@ class GenerateTimeSeriesForHydronicHVACSystemTest < Minitest::Test
 
     # create hash of argument values
     args_hash = {}
-    args_hash['chw_setpoint_temperature'] = 0
+    args_hash["chw_setpoint_temperature"] = 0
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
       temp_arg_var = arg.clone
-      assert(temp_arg_var.setValue(args_hash[arg.name])) if args_hash.has_key?(arg.name)
+      if args_hash.has_key?(arg.name)
+        assert(temp_arg_var.setValue(args_hash[arg.name]))
+      end
       argument_map[arg.name] = temp_arg_var
     end
 
@@ -88,13 +90,15 @@ class GenerateTimeSeriesForHydronicHVACSystemTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    # args_hash['space_name'] = 'New Space'
+    #args_hash['space_name'] = 'New Space'
     # using defaults values from measure.rb for other arguments
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
       temp_arg_var = arg.clone
-      assert(temp_arg_var.setValue(args_hash[arg.name])) if args_hash.key?(arg.name)
+      if args_hash.key?(arg.name)
+        assert(temp_arg_var.setValue(args_hash[arg.name]))
+      end
       argument_map[arg.name] = temp_arg_var
     end
 
@@ -107,8 +111,8 @@ class GenerateTimeSeriesForHydronicHVACSystemTest < Minitest::Test
 
     # assert that it ran correctly
     assert_equal('Success', result.value.valueName)
-    # assert(result.info.size == 0)
-    # assert(result.warnings.empty?)
+    #assert(result.info.size == 0)
+    #assert(result.warnings.empty?)
 
     # check that there is now 1 space
     # assert_equal(1, model.getSpaces.size - num_spaces_seed)
