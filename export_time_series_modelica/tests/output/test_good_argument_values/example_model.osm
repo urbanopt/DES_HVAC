@@ -16774,112 +16774,112 @@ OS:WeatherFile,
   BDF687C1;                               !- Checksum
 
 OS:Output:Variable,
-  {6a703fe7-a8f4-4ec6-abe0-4feb898b9bcb}, !- Handle
+  {b7f6a1b9-0e59-48e5-9d8a-1de03490efb7}, !- Handle
   Output Variable 1,                      !- Name
   ,                                       !- Key Value
   Site Mains Water Temperature,           !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {b431f861-c706-4adb-b531-7de1a5100fc3}, !- Handle
+  {0e699a6d-9365-41ca-a05d-cce66aa81888}, !- Handle
   Output Variable 2,                      !- Name
   ,                                       !- Key Value
   Site Outdoor Air Drybulb Temperature,   !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {f65412f9-117a-4630-b824-d2b326ea2175}, !- Handle
+  {e3eea350-317c-4f7e-ba70-939ae758d8ef}, !- Handle
   Output Variable 3,                      !- Name
   ,                                       !- Key Value
   Site Outdoor Air Relative Humidity,     !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Meter,
-  {fbe0c290-3765-4707-b0cc-a84be9c5cd86}, !- Handle
+  {1f0ef8c4-bfed-4d9a-b981-0aacaefd5736}, !- Handle
   Cooling:Electricity,                    !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {5e0d934c-5570-4fe9-a273-3306ce834461}, !- Handle
+  {54a8383a-9066-40ed-a433-87757503ec7e}, !- Handle
   Heating:Electricity,                    !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {7df67e6a-e9ea-4fa5-9a93-f4c34895e24b}, !- Handle
+  {19e02c1d-a59a-4166-89c6-64a7ad4f7992}, !- Handle
   Heating:Gas,                            !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {5f138be9-dafe-4832-95c7-d94280984eb3}, !- Handle
+  {263b97af-1a44-4aca-b40e-c18e7cc1f059}, !- Handle
   InteriorLights:Electricity,             !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {4fa43c12-481a-4a96-a5bb-9d7e06dc907e}, !- Handle
+  {952a6746-1ddf-4e27-aeb2-cd9f42cd8ce3}, !- Handle
   Fans:Electricity,                       !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {6ee5dfce-cdd7-4776-9996-cd9c97ed0f64}, !- Handle
+  {7edab3df-7faf-4760-a7a0-7faf11295d10}, !- Handle
   InteriorEquipment:Electricity,          !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {8cf3a460-ce7b-4e3b-a5d0-bc3e8a874e57}, !- Handle
+  {70af4701-f6e2-4923-b7ea-39eaa44dffd5}, !- Handle
   ExteriorLighting:Electricity,           !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {2ecc2a4b-0b15-4bbb-8d94-6e23a865c17a}, !- Handle
+  {8c4accf8-c5b0-4405-bbf2-578cc4d2d32a}, !- Handle
   Electricity:Facility,                   !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {7ec17fdb-4ef6-4a4b-b811-b7db751f8329}, !- Handle
+  {59dc296d-d5e1-4ac8-9600-7bac7bfcae9d}, !- Handle
   Gas:Facility,                           !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {0732abf4-3594-48e9-be64-e38e54e2ed56}, !- Handle
+  {cd652764-9c98-4281-8059-7bbceffe3698}, !- Handle
   Heating:EnergyTransfer,                 !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Meter,
-  {57e07474-7897-4131-ab4d-0e4198454572}, !- Handle
+  {4e62813f-32fd-4c7d-9e6e-ce5cda5e91ec}, !- Handle
   WaterSystems:EnergyTransfer,            !- Name
   hourly,                                 !- Reporting Frequency
   False,                                  !- Meter File Only
   False;                                  !- Cumulative
 
 OS:Output:Variable,
-  {913c285f-33bc-4fc7-9c3a-18045d594703}, !- Handle
+  {e89f549d-712a-4943-a8cd-83bc56ea5c77}, !- Handle
   Output Variable 4,                      !- Name
   *,                                      !- Key Value
   Zone Predicted Sensible Load to Setpoint Heat Transfer Rate, !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {73445133-9370-4c9f-82a9-52b6132a8883}, !- Handle
+  {da3690e9-855d-443c-8f77-6ac1a4855107}, !- Handle
   Output Variable 5,                      !- Name
   *,                                      !- Key Value
   Water Heater Total Demand Heat Transfer Rate, !- Variable Name

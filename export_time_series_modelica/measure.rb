@@ -50,9 +50,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
   end
 
   def modeler_description
-    'This measure is currently configured to output the temperatures and mass flow rates at the demand outlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
+    'This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
 	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water loop name contains the word "hot" and the chilled water loop name contains the word "chilled" (non-case-sensitive). This measure also assumes that there is a single heating hot water loop
-	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet nodes for the hot water and chilled water
+	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet and inlet nodes for the hot water and chilled water
 	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. '
   end
 
@@ -298,15 +298,19 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	key_var={}
 	key_var['hhw_outlet_massflow']='massFlowRateHeating'
 	key_var['chw_outlet_massflow']='massFlowRateCooling'
-	key_var['hhw_outlet_temp']='outletTempHeating'
-	key_var['chw_outlet_temp']='outletTempCooling'
+	key_var['hhw_outlet_temp']='heatingReturnTemperature[C]'
+	key_var['chw_outlet_temp']='ChilledWaterReturnTemperature[C]'
+	key_var['chw_inlet_temp']='ChilledWaterSupplyTemperature[C]'
+	key_var['hhw_inlet_temp']='heatingSupplyTemperature[C]'
 	
 	# extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var[key_value_hhw_outlet], key_value_hhw_outlet, 0) 
 	# extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var[key_value_hhw_outlet], key_value_chw_outlet, 0)
+	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0) 
+	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0)
+	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0)
+	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0) 
 	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0) 
 	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0)
-	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0) 
-	extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0)
 	# extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var[key_value_hhw_outlet], key_value_hhw_inlet, 0) 
 	# extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var[key_value_hhw_outlet], key_value_chw_inlet, 0)
     # extract_timeseries_into_matrix(sqlFile, rows, 'Plant Supply Side Cooling Demand Rate', 'Hot Water Loop for VAV with Reheat', 0) ##AA added this
