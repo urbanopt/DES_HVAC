@@ -1,0 +1,8 @@
+{
+   "created_at" : "20201026T212736Z",
+   "hash" : "2DD88B91",
+   "seed_file" : "C:/DES/Measures/export_time_series_modelica/tests/output/test_good_argument_values/example_model.osm",
+   "steps" : [],
+   "updated_at" : "20201026T212736Z",
+   "weather_file" : "C:/DES/Measures/export_time_series_modelica/tests/USA_CO_Golden-NREL.724666_TMY3.epw"
+}

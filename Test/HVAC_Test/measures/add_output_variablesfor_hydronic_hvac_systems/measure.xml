@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>add_output_variablesfor_hydronic_hvac_systems</name>
+  <uid>19a04a3e-4d42-437f-812d-54aa04f3d98e</uid>
+  <version_id>061e6dcb-6a11-474d-87f2-bf4217eb7b55</version_id>
+  <version_modified>20201026T213416Z</version_modified>
+  <xml_checksum>5DD9ABF6</xml_checksum>
+  <class_name>AddOutputVariablesforHydronicHVACSystems</class_name>
+  <display_name>Add Output Variables for Hydronic HVAC Systems</display_name>
+  <description>This measure adds output variables for temperature and mass flow rate at the demand inlet node for hydronic HVAC loops. This measure can be used to generate a time series for modeling a building load attached to a district thermal energy system.</description>
+  <modeler_description>This measure requires that heating hot water and chilled water loops (one of each) be present in the model, and that the heating hot water loop have the word "hot" in its name, and that the chilled water loop have the word "chilled" in its name (non case sensitive). 
+	This measure will be modified in the future to be more generic.</modeler_description>
+  <arguments />
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Reporting.QAQC</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Apply Measure Now</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>Calibration</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>Sensitivity Analysis</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>New Construction EE</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>Retrofit EE</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>CD7F5672</checksum>
+    </file>
+    <file>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>703C9964</checksum>
+    </file>
+    <file>
+      <filename>.gitkeep</filename>
+      <filetype>gitkeep</filetype>
+      <usage_type>doc</usage_type>
+      <checksum>00000000</checksum>
+    </file>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>15AD3659</checksum>
+    </file>
+    <file>
+      <filename>add_output_variablesfor_hydronic_hvac_systems_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5486AB6E</checksum>
+    </file>
+    <file>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>AAA48B39</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>3.0.1</identifier>
+        <min_compatible>3.0.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>ECD52807</checksum>
+    </file>
+  </files>
+</measure>
