@@ -1,7 +1,7 @@
-DES_HVAC
+# DES_HVAC
 
 Repository for scripts related to modeling of different HVAC systems for buildings in a district served by a district thermal energy system.
-Test Suite
+# Test Suite
 
 The test suite is a project for the Parametric Analysis Tool, in which one can apply the measures in this repo to a model (such as one created by the Create DOE Prototype Building measure) to test them.
 
