@@ -24,6 +24,11 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   # define the arguments that the user will input
   def arguments(_model)
     args = OpenStudio::Measure::OSArgumentVector.new
+	
+    hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
+    meter_name.setDisplayName('Name of Heating Hot Water Loop')
+    meter_name.setDefaultValue('hot')
+    args << hhw_loop_name
 
     args
   end
@@ -31,6 +36,9 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   # define what happens when the measure is run
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)
+	
+	
+	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
 
     # use the built-in error checking
     # if !runner.validateUserArguments(arguments(model), user_arguments)
@@ -68,7 +76,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
          outputVariable.setReportingFrequency(reporting_frequency)
 	     outputVariable.setKeyValue(key_value_chw_inlet)
       end 
-	  if plantLoop.name.get.to_s.downcase.include? "hot" 
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name and !plantLoop.name.get.to_s.downcase.include? "service" and !plantLoop.name.get.to_s.downcase.include? "domestic"
 	     #Extract plant loop information 
 		 selected_plant_loops[1]=plantLoop
 		 key_value_hhw_outlet = selected_plant_loops[1].demandOutletNode.name.to_s
