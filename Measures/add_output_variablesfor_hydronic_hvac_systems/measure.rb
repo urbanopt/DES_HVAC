@@ -22,15 +22,20 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   end
 
   # define the arguments that the user will input
-  def arguments(_model)
+  def arguments(model)
     args = OpenStudio::Measure::OSArgumentVector.new
 	
     hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
-    meter_name.setDisplayName('Name of Heating Hot Water Loop')
-    meter_name.setDefaultValue('hot')
+    hhw_loop_name.setDisplayName('Name or Partial Name of Heating Hot Water Loop, non-case-sensitive')
+    hhw_loop_name.setDefaultValue('hot')
     args << hhw_loop_name
+	
+	chw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('chw_loop_name', true)
+    chw_loop_name.setDisplayName('Name or Partial Name of Chilled Water Loop, non-case-sensitive')
+    chw_loop_name.setDefaultValue('chilled')
+    args << chw_loop_name
 
-    args
+    return args
   end
 
   # define what happens when the measure is run
@@ -39,6 +44,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
 	
 	
 	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
+	chw_loop_name = runner.getStringArgumentValue('chw_loop_name', user_arguments)
 
     # use the built-in error checking
     # if !runner.validateUserArguments(arguments(model), user_arguments)
@@ -57,7 +63,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
 	reporting_frequency = 'hourly'
 
     plantloops.each do |plantLoop|
-	  if plantLoop.name.get.to_s.downcase.include? "chilled" 
+	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_s
 	     #Extract plant loop information 
          selected_plant_loops[0]=plantLoop
 		 key_value_chw_outlet = selected_plant_loops[0].demandOutletNode.name.to_s
@@ -76,7 +82,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
          outputVariable.setReportingFrequency(reporting_frequency)
 	     outputVariable.setKeyValue(key_value_chw_inlet)
       end 
-	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name and !plantLoop.name.get.to_s.downcase.include? "service" and !plantLoop.name.get.to_s.downcase.include? "domestic"
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name.to_s and !plantLoop.name.get.to_s.downcase.include? "service" and !plantLoop.name.get.to_s.downcase.include? "domestic"
 	     #Extract plant loop information 
 		 selected_plant_loops[1]=plantLoop
 		 key_value_hhw_outlet = selected_plant_loops[1].demandOutletNode.name.to_s

@@ -20,8 +20,22 @@ ModelMeasure
 ## Arguments
 
 
+### Name or Partial Name of Heating Hot Water Loop, non-case-sensitive
+
+**Name:** hhw_loop_name,
+**Type:** String,
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
+
+### Name or Partial Name of Chilled Water Loop, non-case-sensitive
+
+**Name:** chw_loop_name,
+**Type:** String,
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
 
 
-This measure does not have any user arguments
 
 
