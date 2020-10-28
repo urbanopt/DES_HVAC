@@ -62,7 +62,23 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
   def arguments(_model)
     args = OpenStudio::Measure::OSArgumentVector.new
+	
+    hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
+    hhw_loop_name.setDisplayName('Name or Partial Name of Heating Hot Water Loop, non-case-sensitive')
+    hhw_loop_name.setDefaultValue('hot')
+    args << hhw_loop_name
+	
+	chw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('chw_loop_name', true)
+    chw_loop_name.setDisplayName('Name or Partial Name of Chilled Water Loop, non-case-sensitive')
+    chw_loop_name.setDefaultValue('chilled')
+    args << chw_loop_name
 
+    # make an argument for use_upstream_args
+    use_upstream_args = OpenStudio::Measure::OSArgument.makeBoolArgument('use_upstream_args', true)
+    use_upstream_args.setDisplayName('Use Upstream Argument Values')
+    use_upstream_args.setDescription('When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.')
+    use_upstream_args.setDefaultValue(true)
+    args << use_upstream_args
     # this measure does not require any user arguments, return an empty list
     args
   end
@@ -72,6 +88,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     super(runner, user_arguments)
 
     result = OpenStudio::IdfObjectVector.new
+	
 
     # To use the built-in error checking we need the model...
     # get the last model and sql file
@@ -203,7 +220,32 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
     # use the built-in error checking
     return false unless runner.validateUserArguments(arguments(model), user_arguments)
+	
+	if !args then return false end
 
+    # lookup and replace argument values from upstream measures
+    if args['use_upstream_args'] == true
+      args.each do |arg,value|
+        next if arg == 'use_upstream_args' # this argument should not be changed
+        value_from_osw = OsLib_HelperMethods.check_upstream_measure_for_arg(runner, arg)
+        if !value_from_osw.empty?
+          runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
+          new_val = value_from_osw[:value]
+          # todo - make code to handle non strings more robust. check_upstream_measure_for_arg coudl pass bakc the argument type
+          if arg == 'total_bldg_floor_area'
+            args[arg] = new_val.to_f
+          elsif arg == 'num_stories_above_grade'
+            args[arg] = new_val.to_f
+          elsif arg == 'zipcode'
+            args[arg] = new_val.to_i
+          else
+            args[arg] = new_val
+          end
+        end
+      end
+    end
+    hhw_loop_name = args['hhw_loop_name ']
+	chw_loop_name = args['chw_loop_name ']
     # get the last model and sql file
     model = runner.lastOpenStudioModel
     if model.empty?
@@ -265,11 +307,11 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	key_var={}
 
     plantloops.each do |plantLoop|
-	  if plantLoop.name.get.to_s.downcase.include? "chilled" 
+	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_str
 	     #Extract plant loop information 
          selected_plant_loops[0]=plantLoop
 	  end 
-	  if plantLoop.name.get.to_s.downcase.include? "hot" 
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name.to_str
          #Get plant loop information
 		 selected_plant_loops[1]=plantLoop
 	  end 
