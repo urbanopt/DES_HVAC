@@ -35,8 +35,11 @@
 
 require 'erb'
 
+
 # start the measure
 class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
+  Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
+  include OsLib_HelperMethods
   # human readable name
   def name
     # Measure name should be the title case of the class name.
@@ -79,8 +82,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     use_upstream_args.setDescription('When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.')
     use_upstream_args.setDefaultValue(true)
     args << use_upstream_args
-    # this measure does not require any user arguments, return an empty list
-    args
+
+    return args
   end
 
   # return a vector of IdfObject's to request EnergyPlus objects needed by the run method
@@ -221,6 +224,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     # use the built-in error checking
     return false unless runner.validateUserArguments(arguments(model), user_arguments)
 	
+	args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments(model))
 	if !args then return false end
 
     # lookup and replace argument values from upstream measures
@@ -232,20 +236,18 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
           runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
           new_val = value_from_osw[:value]
           # todo - make code to handle non strings more robust. check_upstream_measure_for_arg coudl pass bakc the argument type
-          if arg == 'total_bldg_floor_area'
-            args[arg] = new_val.to_f
-          elsif arg == 'num_stories_above_grade'
-            args[arg] = new_val.to_f
-          elsif arg == 'zipcode'
-            args[arg] = new_val.to_i
+          if arg == 'hhw_loop_name'
+            args[arg] = new_val.to_s
+          elsif arg == 'chw_loop_name'
+            args[arg] = new_val.to_s
           else
             args[arg] = new_val
           end
         end
       end
     end
-    hhw_loop_name = args['hhw_loop_name ']
-	chw_loop_name = args['chw_loop_name ']
+    hhw_loop_name = args['hhw_loop_name']
+	chw_loop_name = args['chw_loop_name']
     # get the last model and sql file
     model = runner.lastOpenStudioModel
     if model.empty?
