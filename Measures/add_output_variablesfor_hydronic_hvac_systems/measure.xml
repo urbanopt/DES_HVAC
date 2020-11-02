@@ -3,8 +3,8 @@
   <schema_version>3.0</schema_version>
   <name>add_output_variablesfor_hydronic_hvac_systems</name>
   <uid>19a04a3e-4d42-437f-812d-54aa04f3d98e</uid>
-  <version_id>912827ef-38cb-42d6-8b23-0971a63b0823</version_id>
-  <version_modified>20201028T213610Z</version_modified>
+  <version_id>9232caff-bc7f-4ac1-9607-0ba97c15d282</version_id>
+  <version_modified>20201102T171432Z</version_modified>
   <xml_checksum>5DD9ABF6</xml_checksum>
   <class_name>AddOutputVariablesforHydronicHVACSystems</class_name>
   <display_name>Add Output Variables for Hydronic HVAC Systems</display_name>
@@ -102,10 +102,10 @@
       <checksum>15AD3659</checksum>
     </file>
     <file>
-      <filename>add_output_variablesfor_hydronic_hvac_systems_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>5486AB6E</checksum>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>E21E1DCC</checksum>
     </file>
     <file>
       <version>
@@ -116,13 +116,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>D9A45AC5</checksum>
+      <checksum>4CB28E11</checksum>
     </file>
     <file>
-      <filename>README.md</filename>
-      <filetype>md</filetype>
-      <usage_type>readme</usage_type>
-      <checksum>E21E1DCC</checksum>
+      <filename>add_output_variablesfor_hydronic_hvac_systems_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>728E2738</checksum>
     </file>
   </files>
 </measure>

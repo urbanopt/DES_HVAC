@@ -16774,56 +16774,56 @@ OS:WeatherFile,
   BDF687C1;                               !- Checksum
 
 OS:Output:Variable,
-  {8f7f358e-54f9-4308-a6d5-77052c972b68}, !- Handle
+  {e684235e-de58-441a-b5b8-6d1ceba1b0d9}, !- Handle
   Output Variable 1,                      !- Name
   Node 5,                                 !- Key Value
   System Node Mass Flow Rate,             !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {cc41f117-3109-4673-af7c-e398a694dfce}, !- Handle
+  {10e623f0-e4a4-4e6f-850f-345bb5d1a79c}, !- Handle
   Output Variable 2,                      !- Name
   Node 4,                                 !- Key Value
   System Node Mass Flow Rate,             !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {ee05e991-e13d-49eb-a3f0-884a94f9d8e0}, !- Handle
+  {58b496e2-7030-4da2-b94c-a0cb138a2a99}, !- Handle
   Output Variable 3,                      !- Name
   Node 5,                                 !- Key Value
   System Node Temperature,                !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {cd4108b2-bbd1-4791-9a26-42e616d20104}, !- Handle
+  {1084faff-756e-4335-a8bb-f72fa3453490}, !- Handle
   Output Variable 4,                      !- Name
   Node 4,                                 !- Key Value
   System Node Temperature,                !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {f215fd6f-9adb-48d1-ad81-8a7128f00cbb}, !- Handle
+  {0b316bf6-a891-4dd1-82f2-d9bd0f2a95cd}, !- Handle
   Output Variable 5,                      !- Name
   Node 16,                                !- Key Value
   System Node Temperature,                !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {54f62250-39f1-476e-bb8b-0f7849f4d17d}, !- Handle
+  {f4eff4ea-a0a6-4093-af43-c1c5e587d78a}, !- Handle
   Output Variable 6,                      !- Name
   Node 15,                                !- Key Value
   System Node Temperature,                !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {7f996e3a-0a9c-4c09-99b4-7d85c19dfa6d}, !- Handle
+  {5caba407-5f83-4d4c-9ef5-a6f56f970127}, !- Handle
   Output Variable 7,                      !- Name
   Node 16,                                !- Key Value
   System Node Mass Flow Rate,             !- Variable Name
   hourly;                                 !- Reporting Frequency
 
 OS:Output:Variable,
-  {857b83a7-e60a-4b2d-a8aa-6c98323d18dd}, !- Handle
+  {3e9303bc-0841-4fa1-bd9e-5c319413c770}, !- Handle
   Output Variable 8,                      !- Name
   Node 15,                                !- Key Value
   System Node Mass Flow Rate,             !- Variable Name

@@ -56,7 +56,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     'This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
 	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water loop name contains the word "hot" and the chilled water loop name contains the word "chilled" (non-case-sensitive). This measure also assumes that there is a single heating hot water loop
 	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet and inlet nodes for the hot water and chilled water
-	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. '
+	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. Note that this measurele
+    leverages the "get upstream argument values" approach used in other OpenStudio measures, specifically from "Get Site from Building Component Library."'
   end
 
   def log(str)
@@ -235,7 +236,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
         if !value_from_osw.empty?
           runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
           new_val = value_from_osw[:value]
-          # todo - make code to handle non strings more robust. check_upstream_measure_for_arg coudl pass bakc the argument type
+          # todo - make code to handle non strings more robust. check_upstream_measure_for_arg could pass bakc the argument type
           if arg == 'hhw_loop_name'
             args[arg] = new_val.to_s
           elsif arg == 'chw_loop_name'
@@ -348,6 +349,13 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	else 
 	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the string 'chilled' is in its name.") 
     end 
+	
+   
+   if selected_plant_loops[0].nil? and selected_plant_loops[1].nil?
+    runner.registerError("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string 'hot' in its name, 
+	and the cooling loop has the string 'chilled' in its name.") 
+   end 
+   
    if !selected_plant_loops.nil?
     # convert this to CSV object
     File.open('./building_loads.csv', 'w') do |f|
@@ -355,17 +363,14 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
         f << row.join(',') << "\n"
       end
 	end 
- else 
-    runner.registerError("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string 'hot' in its name, 
-	and the cooling loop has the string 'chilled' in its name.") 
-end 
+   end 
 
-  
     true
   ensure
     sqlFile&.close
   end
-end
+  end 
+
 
 # register the measure to be used by the application
 ExportTimeSeriesLoadsCSV.new.registerWithApplication

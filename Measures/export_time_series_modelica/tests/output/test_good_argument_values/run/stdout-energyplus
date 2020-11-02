@@ -1,5 +1,5 @@
 EnergyPlus Starting
-EnergyPlus, Version 9.3.0-baff08990c, YMD=2020.10.26 15:28
+EnergyPlus, Version 9.3.0-baff08990c, YMD=2020.11.02 10:49
 Initializing Response Factors
 Calculating CTFs for "INTERIORFURNISHINGS", Construction # 1
 Calculating CTFs for "PLENUM ACOUSTICAL TILE", Construction # 2
@@ -233,5 +233,5 @@ Updating Detailed Daylighting Factors, Start Date=12/31
 Writing tabular output file results using HTML format.
 Computing Life Cycle Costs and Reporting
 Writing final SQL reports
-EnergyPlus Run Time=00hr 01min 36.75sec
+EnergyPlus Run Time=00hr 01min  7.10sec
 EnergyPlus Completed Successfully.

@@ -42,16 +42,15 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)
 	
+	#use the built-in error checking
+    if !runner.validateUserArguments(arguments(model), user_arguments)
+      return false
+    end
+	
 	
 	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
 	chw_loop_name = runner.getStringArgumentValue('chw_loop_name', user_arguments)
 
-    # use the built-in error checking
-    # if !runner.validateUserArguments(arguments(model), user_arguments)
-      # return false
-    # end
- 
-	
 	#Identify key names for output variables. 
 	plantloops = model.getPlantLoops
 
