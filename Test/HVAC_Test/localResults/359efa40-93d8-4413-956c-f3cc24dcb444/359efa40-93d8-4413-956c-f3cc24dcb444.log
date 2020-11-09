@@ -1,0 +1,133 @@
+# Logfile created on 2020-11-09 23:24:10 +0000 by logger.rb/61378
+[23:24:10.222184 INFO] Server host is http://web:80
+[23:24:10.222337 INFO] Analysis directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6
+[23:24:10.222428 INFO] Simulation directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444
+[23:24:10.222479 INFO] Run datapoint type/file is 
+[23:24:10.222565 INFO] Starting initialize_worker for datapoint 359efa40-93d8-4413-956c-f3cc24dcb444
+[23:24:10.223086 INFO] Downloading analysis zip from http://web:80/analyses/de910ddf-9641-4d1c-8060-715d502f03f6/download_analysis_zip
+[23:24:13.585133 INFO] Extracting analysis zip to /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6
+[23:24:13.591063 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/
+[23:24:13.591369 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/LICENSE.md
+[23:24:13.592213 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/README.md
+[23:24:13.592600 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/README.md.erb
+[23:24:13.593025 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/docs/
+[23:24:13.593191 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/measure.rb
+[23:24:13.594607 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/measure.xml
+[23:24:13.595114 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/tests/
+[23:24:13.595509 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/tests/add_output_variablesfor_hydronic_hvac_systems_test.rb
+[23:24:13.595980 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/tests/example_model.osm
+[23:24:13.601515 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/tests/output/
+[23:24:13.601738 INFO] Zip: Extracting measures/add_output_variablesfor_hydronic_hvac_systems/tests/output/test_output.osm
+[23:24:13.607111 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/
+[23:24:13.607278 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/LICENSE.md
+[23:24:13.607600 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/README.md
+[23:24:13.608044 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/README.md.erb
+[23:24:13.608357 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/measure.rb
+[23:24:13.608914 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/measure.xml
+[23:24:13.609337 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/tests/
+[23:24:13.609492 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/tests/create_DOE_prototype_building_test.rb
+[23:24:13.609992 INFO] Zip: Extracting measures/cd977924-f8f2-4519-8756-9ba34ba49714/tests/legacy_idf_results.json
+[23:24:13.733124 INFO] Zip: Extracting measures/export_time_series_modelica/
+[23:24:13.733369 INFO] Zip: Extracting measures/export_time_series_modelica/LICENSE.md
+[23:24:13.733915 INFO] Zip: Extracting measures/export_time_series_modelica/README.md
+[23:24:13.734278 INFO] Zip: Extracting measures/export_time_series_modelica/README.md.erb
+[23:24:13.734629 INFO] Zip: Extracting measures/export_time_series_modelica/docs/
+[23:24:13.734893 INFO] Zip: Extracting measures/export_time_series_modelica/measure.rb
+[23:24:13.735251 INFO] Zip: Extracting measures/export_time_series_modelica/measure.xml
+[23:24:13.735602 INFO] Zip: Extracting measures/export_time_series_modelica/resources/
+[23:24:13.735887 INFO] Zip: Extracting measures/export_time_series_modelica/resources/report.html.in
+[23:24:13.736151 INFO] Zip: Extracting measures/export_time_series_modelica/tests/
+[23:24:13.736312 INFO] Zip: Extracting measures/export_time_series_modelica/tests/USA_CO_Golden-NREL.724666_TMY3.epw
+[23:24:13.827643 INFO] Zip: Extracting measures/export_time_series_modelica/tests/building_loads.csv
+[23:24:13.830634 INFO] Zip: Extracting measures/export_time_series_modelica/tests/example_model.osm
+[23:24:13.835894 INFO] Zip: Extracting measures/export_time_series_modelica/tests/export_time_series_modelica_test.rb
+[23:24:13.836232 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/
+[23:24:13.836390 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/
+[23:24:13.836557 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/example_model.osm
+[23:24:13.841716 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/in.osw
+[23:24:13.842116 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/out.osw
+[23:24:13.843617 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/reports/
+[23:24:13.843937 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/reports/eplustbl.html
+[23:24:13.848956 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/
+[23:24:13.849148 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/data_point.zip
+[23:24:13.934761 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/data_point_out.json
+[23:24:13.935350 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.audit
+[23:24:13.935874 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.bnd
+[23:24:13.937632 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.eio
+[23:24:13.938908 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.end
+[23:24:13.939260 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.err
+[23:24:13.939958 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.eso
+[23:24:14.156670 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.mdd
+[23:24:14.157300 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.mtd
+[23:24:14.158148 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.rdd
+[23:24:14.158699 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.shd
+[23:24:14.159172 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusout.sql
+[23:24:14.268901 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplusssz.csv
+[23:24:14.269666 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/eplustbl.htm
+[23:24:14.279166 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/epluszsz.csv
+[23:24:14.280884 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/finished.job
+[23:24:14.281160 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/in.idf
+[23:24:14.284916 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/in.osm
+[23:24:14.289981 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/measure_attributes.json
+[23:24:14.291394 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/objectives.json
+[23:24:14.292325 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/pre-preprocess.idf
+[23:24:14.296136 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/results.json
+[23:24:14.296620 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/run.log
+[23:24:14.297178 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/sqlite.err
+[23:24:14.297506 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/started.job
+[23:24:14.297936 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/stdout-energyplus
+[23:24:14.298246 INFO] Zip: Extracting measures/export_time_series_modelica/tests/output/test_good_argument_values/run/stdout-expandobject
+[23:24:14.298574 INFO] Zip: Extracting seeds/example_model.osm
+[23:24:14.302971 INFO] Zip: Extracting seeds/example_model_misnamed_loop.osm
+[23:24:14.308024 INFO] Zip: Extracting weather/USA_CO_Golden-NREL.724666_TMY3.epw
+[23:24:14.319329 INFO] Downloading analysis.json from http://web:80/analyses/de910ddf-9641-4d1c-8060-715d502f03f6.json
+[23:24:14.344526 INFO] Checking for presence of args file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/initialize.args
+[23:24:14.344622 INFO] Checking for presence of script file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/initialize.sh
+[23:24:14.344722 INFO] Finished worker initialization
+[23:24:14.344862 INFO] RestClient delete
+[23:24:14.344912 INFO] delete post_count = 1
+[23:24:14.355198 INFO] Downloading datapoint from http://web:80/data_points/359efa40-93d8-4413-956c-f3cc24dcb444.json
+[23:24:14.355251 INFO] get url post_count = 1
+[23:24:14.368754 INFO] Creating Workflow Manager instance
+[23:24:14.368909 INFO] Directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444
+[23:24:14.368970 INFO] Opening run.log file '/mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/run/run.log'
+[23:24:14.369121 WARN] Error finding Oscli: OPENSTUDIO_EXE_PATH not set
+[23:24:14.379048 WARN] Defaulting to fun Oscli via /usr/local/bin/openstudio
+[23:24:14.379221 INFO] Returning Oscli cmd: /usr/local/bin/openstudio --bundle /var/oscli/Gemfile --bundle_path /var/oscli/gems --bundle_without native_ext
+[23:24:14.379445 INFO] Running workflow using cmd /usr/local/bin/openstudio --bundle /var/oscli/Gemfile --bundle_path /var/oscli/gems --bundle_without native_ext  run --workflow '/mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/data_point.osw'  and writing log to /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/oscli_simulation.log
+[23:25:33.550936 INFO] Oscli output: /var/oscli/gems/ruby/2.5.0/gems/openstudio-workflow-2.1.0/lib/openstudio/workflow/util/measure.rb:413: warning: constant ::Fixnum is deprecated
+[23:24:18.800351 WARN] No hot water loop found. If a hot loop should be present, verify that its name includes the word 'hot.'
+2020-11-09 23:25:30 +0000: Starting to process Timeseries data
+[23:25:31.317378 WARN] No hot water loop found. If one is expected, make sure the string 'hot' is in its name.
+2020-11-09 23:25:31 +0000: Executing query for System Node Temperature
+2020-11-09 23:25:31 +0000: Iterating over timeseries
+2020-11-09 23:25:31 +0000: Took 0.0072508 to iterate
+2020-11-09 23:25:31 +0000: Appending column to data
+2020-11-09 23:25:31 +0000: Finished extracting System Node Temperature
+2020-11-09 23:25:31 +0000: Executing query for System Node Temperature
+2020-11-09 23:25:31 +0000: Iterating over timeseries
+2020-11-09 23:25:31 +0000: Took 0.0051791 to iterate
+2020-11-09 23:25:31 +0000: Appending column to data
+2020-11-09 23:25:31 +0000: Finished extracting System Node Temperature
+2020-11-09 23:25:31 +0000: Executing query for System Node Mass Flow Rate
+2020-11-09 23:25:31 +0000: Iterating over timeseries
+2020-11-09 23:25:31 +0000: Took 0.0052127 to iterate
+2020-11-09 23:25:31 +0000: Appending column to data
+2020-11-09 23:25:31 +0000: Finished extracting System Node Mass Flow Rate
+
+[23:25:33.555071 INFO] Saving files/reports back to the server
+[23:25:33.555192 INFO] downloading reports/*.{html,json,csv}
+[23:25:33.555447 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/reports/eplustbl.html to http://web:80/data_points/359efa40-93d8-4413-956c-f3cc24dcb444/upload_file
+[23:25:33.605932 INFO] Saving report responded with {"id":"5fa9cfed5872770094d3999e","data_point_id":"359efa40-93d8-4413-956c-f3cc24dcb444","display_name":"eplustbl","type":"Report","created_at":"2020-11-09T23:25:33.594Z","updated_at":"2020-11-09T23:25:33.594Z"}
+[23:25:33.606245 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/run/objectives.json to http://web:80/data_points/359efa40-93d8-4413-956c-f3cc24dcb444/upload_file
+[23:25:33.625929 INFO] Saving report responded with {"id":"5fa9cfed5872770094d3999f","data_point_id":"359efa40-93d8-4413-956c-f3cc24dcb444","display_name":"objectives","type":"Report","created_at":"2020-11-09T23:25:33.617Z","updated_at":"2020-11-09T23:25:33.617Z"}
+[23:25:33.626231 INFO] downloading out.OSW
+[23:25:33.626359 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/out.osw to http://web:80/data_points/359efa40-93d8-4413-956c-f3cc24dcb444/upload_file
+[23:25:33.646546 INFO] Saving report responded with {"id":"5fa9cfed5872770094d399a0","data_point_id":"359efa40-93d8-4413-956c-f3cc24dcb444","display_name":"Final OSW File","type":"Report","created_at":"2020-11-09T23:25:33.637Z","updated_at":"2020-11-09T23:25:33.637Z"}
+[23:25:33.646927 INFO] downloading in.OSM
+[23:25:33.647083 INFO] downloading datapoint.ZIP
+[23:25:33.647187 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_359efa40-93d8-4413-956c-f3cc24dcb444/run/data_point.zip to http://web:80/data_points/359efa40-93d8-4413-956c-f3cc24dcb444/upload_file
+[23:25:33.998943 INFO] Saving report responded with {"id":"5fa9cfed5872770094d399a1","data_point_id":"359efa40-93d8-4413-956c-f3cc24dcb444","display_name":"Zip File","type":"Data Point","created_at":"2020-11-09T23:25:33.969Z","updated_at":"2020-11-09T23:25:33.969Z"}
+[23:25:33.999324 INFO] Checking for presence of args file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/finalize.args
+[23:25:33.999412 INFO] Checking for presence of script file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/finalize.sh
+[23:25:34.003786 INFO] Finished /opt/openstudio/server/app/jobs/dj_jobs/run_simulate_data_point.rb
