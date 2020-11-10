@@ -1,0 +1,8 @@
+{
+   "created_at" : "20201102T174857Z",
+   "hash" : "4D6037B0",
+   "seed_file" : "C:/Users/User/Documents/GitHub/DES_HVAC/Measures/export_time_series_modelica/tests/output/test_good_argument_values/example_model.osm",
+   "steps" : [],
+   "updated_at" : "20201102T174857Z",
+   "weather_file" : "C:/Users/User/Documents/GitHub/DES_HVAC/Measures/export_time_series_modelica/tests/USA_CO_Golden-NREL.724666_TMY3.epw"
+}

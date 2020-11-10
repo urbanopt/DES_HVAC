@@ -1,0 +1,104 @@
+# Logfile created on 2020-11-09 23:25:34 +0000 by logger.rb/61378
+[23:25:34.095500 INFO] Server host is http://web:80
+[23:25:34.095710 INFO] Analysis directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6
+[23:25:34.095883 INFO] Simulation directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f
+[23:25:34.095947 INFO] Run datapoint type/file is 
+[23:25:34.096033 INFO] Starting initialize_worker for datapoint b2efbf05-b16d-43c0-aafa-4844116d944f
+[23:25:34.096156 INFO] receipt_file already exists, moving on
+[23:25:34.096224 INFO] RestClient delete
+[23:25:34.096263 INFO] delete post_count = 1
+[23:25:34.117287 INFO] Downloading datapoint from http://web:80/data_points/b2efbf05-b16d-43c0-aafa-4844116d944f.json
+[23:25:34.117377 INFO] get url post_count = 1
+[23:25:34.131859 INFO] Creating Workflow Manager instance
+[23:25:34.131935 INFO] Directory is /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f
+[23:25:34.132033 INFO] Opening run.log file '/mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/run/run.log'
+[23:25:34.132419 WARN] Error finding Oscli: OPENSTUDIO_EXE_PATH not set
+[23:25:34.140608 WARN] Defaulting to fun Oscli via /usr/local/bin/openstudio
+[23:25:34.140882 INFO] Returning Oscli cmd: /usr/local/bin/openstudio --bundle /var/oscli/Gemfile --bundle_path /var/oscli/gems --bundle_without native_ext
+[23:25:34.141062 INFO] Running workflow using cmd /usr/local/bin/openstudio --bundle /var/oscli/Gemfile --bundle_path /var/oscli/gems --bundle_without native_ext  run --workflow '/mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/data_point.osw'  and writing log to /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/oscli_simulation.log
+[23:30:59.253506 INFO] Oscli output: /var/oscli/gems/ruby/2.5.0/gems/openstudio-workflow-2.1.0/lib/openstudio/workflow/util/measure.rb:413: warning: constant ::Fixnum is deprecated
+"/usr/local/openstudio-3.1.0/bin/openstudio" run -w "/mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/run/000_cd977924-f8f2-4519-8756-9ba34ba49714/output/SR1/in.osw"
+[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription
+[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription
+[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription
+[openstudio.model.YearDescription] <1> 'UseWeatherFile' is not yet a supported option for YearDescription
+INFO: Model name is now -LargeOffice-ASHRAE 169-2013-2A created: 2020-11-09 23:25:41 +0000.
+[23:26:07.078828 WARN] [openstudio.EpwFile] Successive data points (2001-Jan-31 to 1996-Feb-01, ending on line 753) are greater than 1 day apart in EPW file '/var/oscli/gems/ruby/2.5.0/gems/openstudio-standards-0.2.12/data/weather/USA_FL_Tampa-MacDill.AFB.747880_TMY3.epw'. Data will be treated as typical (TMY)
+[23:26:07.078959 WARN] [openstudio.Prototype.hvac_systems] No valid WB=>MDB Summer Design Days were found in the model.  Attempting to load wet bulb sizing from the .ddy file directly.
+[23:26:07.079001 WARN] [openstudio.Prototype.CoolingTower] For condenser loop Condenser Water Loop, reduced design OATwb from 81.0 F to EneryPlus model maximum limit of 80.0 F.
+[23:26:07.079065 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079082 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079106 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079156 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079180 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079202 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079245 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079263 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079306 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079327 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079416 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079524 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079553 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079578 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079601 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079644 WARN] [openstudio.model.AirTerminalSingleDuctVAVReheat] setZoneMinimumAirFlowMethod is deprecated, please use setZoneMinimumAirFlowInputMethod
+[23:26:07.079779 WARN] [openstudio.standards.Construction] Can only set the u-value of opaque constructions or simple glazing. U 0.72 SHGC 0.25 Sgl Ref-B-M Tint 6mm is not opaque or simple glazing.
+[23:26:07.079816 WARN] [openstudio.standards.Construction] Can only set the u-value of opaque constructions or simple glazing. U 0.88 SHGC 0.16 Sgl Ref-A-L Clr 6mm is not opaque or simple glazing.
+[23:26:07.079845 WARN] [openstudio.standards.Construction] Requested U-value of 1.1686635536297982 for Typical Overhead Door is greater than the sum of the inside and outside resistance, and the max U-value (6.636 SI) is used instead.
+[23:26:07.079908 WARN] [openstudio.standards.Construction] Can only set the u-value of opaque constructions or simple glazing. U 1.98 SHGC 0.36 Sgl Ref-B-H Clr 6mm is not opaque or simple glazing.
+[23:26:07.081164 WARN] [openstudio.standards.CoilCoolingWaterToAirHeatPumpEquationFit] For DataCenter_basement_ZN_6 ZN PSZ-AC Data Center Water-to-Air HP Clg Coil, cannot find efficiency info using {"template"=>"90.1-2010"}, cannot apply efficiency standard.
+[23:26:07.081201 WARN] [openstudio.standards.CoilCoolingWaterToAirHeatPumpEquationFit] For DataCenter_mid_ZN_6 ZN PSZ-AC Data Center Water-to-Air HP Clg Coil, cannot find efficiency info using {"template"=>"90.1-2010"}, cannot apply efficiency standard.
+[23:26:07.081285 WARN] [openstudio.standards.Model] Find object search criteria returned 2 results, the first one will be returned. Called from /var/oscli/gems/ruby/2.5.0/gems/openstudio-standards-0.2.12/lib/openstudio-standards/standards/Standards.CoolingTower.rb:74:in `cooling_tower_apply_minimum_power_per_flow'. 
+ Search criteria: 
+ {"template"=>"90.1-2010", "equipment_type"=>"Open Cooling Tower"}, capacity =  
+  All results: 
+ {"template"=>"90.1-2010", "equipment_type"=>"Open Cooling Tower", "fan_type"=>"Centrifugal", "start_date"=>"1919-09-09T00:00:00+00:00", "end_date"=>"2999-09-09T00:00:00+00:00", "minimum_performance"=>20.0, "notes"=>"From 90.1-2010 Table 6.8.1 G"}
+{"template"=>"90.1-2010", "equipment_type"=>"Open Cooling Tower", "fan_type"=>"Propeller or Axial", "start_date"=>"1919-09-09T00:00:00+00:00", "end_date"=>"2999-09-09T00:00:00+00:00", "minimum_performance"=>38.2, "notes"=>"From 90.1-2010 Table 6.8.1 G"}
+2020-11-09 23:30:53 +0000: Starting to process Timeseries data
+2020-11-09 23:30:54 +0000: Executing query for System Node Temperature
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.007546 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Temperature
+2020-11-09 23:30:54 +0000: Executing query for System Node Temperature
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.0077255 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Temperature
+2020-11-09 23:30:54 +0000: Executing query for System Node Mass Flow Rate
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.0046586 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Mass Flow Rate
+2020-11-09 23:30:54 +0000: Executing query for System Node Temperature
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.0073814 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Temperature
+2020-11-09 23:30:54 +0000: Executing query for System Node Temperature
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.0047685 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Temperature
+2020-11-09 23:30:54 +0000: Executing query for System Node Mass Flow Rate
+2020-11-09 23:30:54 +0000: Iterating over timeseries
+2020-11-09 23:30:54 +0000: Took 0.0070527 to iterate
+2020-11-09 23:30:54 +0000: Appending column to data
+2020-11-09 23:30:54 +0000: Finished extracting System Node Mass Flow Rate
+
+[23:30:59.259294 INFO] Saving files/reports back to the server
+[23:30:59.259465 INFO] downloading reports/*.{html,json,csv}
+[23:30:59.259913 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/reports/eplustbl.html to http://web:80/data_points/b2efbf05-b16d-43c0-aafa-4844116d944f/upload_file
+[23:30:59.341934 INFO] Saving report responded with {"id":"5fa9d1335872770094d399a3","data_point_id":"b2efbf05-b16d-43c0-aafa-4844116d944f","display_name":"eplustbl","type":"Report","created_at":"2020-11-09T23:30:59.328Z","updated_at":"2020-11-09T23:30:59.328Z"}
+[23:30:59.342262 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/run/objectives.json to http://web:80/data_points/b2efbf05-b16d-43c0-aafa-4844116d944f/upload_file
+[23:30:59.363071 INFO] Saving report responded with {"id":"5fa9d1335872770094d399a4","data_point_id":"b2efbf05-b16d-43c0-aafa-4844116d944f","display_name":"objectives","type":"Report","created_at":"2020-11-09T23:30:59.353Z","updated_at":"2020-11-09T23:30:59.353Z"}
+[23:30:59.363586 INFO] downloading out.OSW
+[23:30:59.363838 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/out.osw to http://web:80/data_points/b2efbf05-b16d-43c0-aafa-4844116d944f/upload_file
+[23:30:59.391134 INFO] Saving report responded with {"id":"5fa9d1335872770094d399a5","data_point_id":"b2efbf05-b16d-43c0-aafa-4844116d944f","display_name":"Final OSW File","type":"Report","created_at":"2020-11-09T23:30:59.381Z","updated_at":"2020-11-09T23:30:59.381Z"}
+[23:30:59.391436 INFO] downloading in.OSM
+[23:30:59.391688 INFO] downloading datapoint.ZIP
+[23:30:59.391829 INFO] Saving report /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/data_point_b2efbf05-b16d-43c0-aafa-4844116d944f/run/data_point.zip to http://web:80/data_points/b2efbf05-b16d-43c0-aafa-4844116d944f/upload_file
+[23:31:00.121152 INFO] Saving report responded with {"id":"5fa9d1345872770094d399a6","data_point_id":"b2efbf05-b16d-43c0-aafa-4844116d944f","display_name":"Zip File","type":"Data Point","created_at":"2020-11-09T23:31:00.063Z","updated_at":"2020-11-09T23:31:00.063Z"}
+[23:31:00.121684 INFO] Checking for presence of args file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/finalize.args
+[23:31:00.121850 INFO] Checking for presence of script file at /mnt/openstudio/analysis_de910ddf-9641-4d1c-8060-715d502f03f6/scripts/data_point/finalize.sh
+[23:31:00.125971 INFO] Finished /opt/openstudio/server/app/jobs/dj_jobs/run_simulate_data_point.rb

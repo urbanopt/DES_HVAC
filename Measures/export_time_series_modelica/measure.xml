@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>export_time_series_loads_csv</name>
+  <uid>9fcf6116-c2eb-43d6-93f0-e1bdd822f768</uid>
+  <version_id>ee0cfc8d-2673-45d2-9eb8-fbafea3f087f</version_id>
+  <version_modified>20201110T042700Z</version_modified>
+  <xml_checksum>9BF1E6AC</xml_checksum>
+  <class_name>ExportTimeSeriesLoadsCSV</class_name>
+  <display_name>ExportTimeSeriesLoadsCSV</display_name>
+  <description>This measure will create a CSV file with plant loop level mass flow rates and temperatures for use in a Modelica simulation. Note that this measure has certain
+	 requirements for naming of hydronic loops (discussed in the modeler description section) and requires that certain output variables be present in the model. These
+	 output variables can be added with the Add Output Variables for Hydronic HVAC Systems measure.</description>
+  <modeler_description>This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
+	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water loop name contains the word "hot" and the chilled water loop name contains the word "chilled" (non-case-sensitive). This measure also assumes that there is a single heating hot water loop
+	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet and inlet nodes for the hot water and chilled water
+	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. Note that this measurele
+    leverages the "get upstream argument values" approach used in other OpenStudio measures, specifically from "Get Site from Building Component Library."</modeler_description>
+  <arguments>
+    <argument>
+      <name>hhw_loop_name</name>
+      <display_name>Name or Partial Name of Heating Hot Water Loop, non-case-sensitive</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>hot</default_value>
+    </argument>
+    <argument>
+      <name>chw_loop_name</name>
+      <display_name>Name or Partial Name of Chilled Water Loop, non-case-sensitive</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>chilled</default_value>
+    </argument>
+    <argument>
+      <name>use_upstream_args</name>
+      <display_name>Use Upstream Argument Values</display_name>
+      <description>When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.</description>
+      <type>Boolean</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>true</default_value>
+      <choices>
+        <choice>
+          <value>true</value>
+          <display_name>true</display_name>
+        </choice>
+        <choice>
+          <value>false</value>
+          <display_name>false</display_name>
+        </choice>
+      </choices>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Reporting.QAQC</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ReportingMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>CD7F5672</checksum>
+    </file>
+    <file>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>703C9964</checksum>
+    </file>
+    <file>
+      <filename>.gitkeep</filename>
+      <filetype>gitkeep</filetype>
+      <usage_type>doc</usage_type>
+      <checksum>00000000</checksum>
+    </file>
+    <file>
+      <filename>USA_CO_Golden-NREL.724666_TMY3.epw</filename>
+      <filetype>epw</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BDF687C1</checksum>
+    </file>
+    <file>
+      <filename>report.html.in</filename>
+      <filetype>in</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>3F69E3FB</checksum>
+    </file>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>15AD3659</checksum>
+    </file>
+    <file>
+      <filename>building_loads.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>393EEB17</checksum>
+    </file>
+    <file>
+      <filename>os_lib_helper_methods.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>5C26809A</checksum>
+    </file>
+    <file>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>16C1F7A3</checksum>
+    </file>
+    <file>
+      <filename>export_time_series_modelica_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6CCD6AB6</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>3.0.1</identifier>
+        <min_compatible>3.0.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>9E734273</checksum>
+    </file>
+  </files>
+</measure>
