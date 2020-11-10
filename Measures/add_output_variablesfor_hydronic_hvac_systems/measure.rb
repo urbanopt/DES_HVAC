@@ -103,11 +103,11 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
    end 
    
    if selected_plant_loops[1].nil?
-	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that its name includes the word 'hot.'") 
+	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that the hot water loop name argument provides a string present in its name.") 
    end 
    
    if selected_plant_loops[0].nil?
-   	     runner.registerWarning("No chilled water loop found. If a chilled water loop should be present, verify that its name includes the word 'chilled.'") 
+   	     runner.registerWarning("No chilled water loop found. If a chilled water loop should be present, verify that the chilled water loop name argument provides a string present in its name.") 
    end 
    
    if selected_plant_loops.empty?
