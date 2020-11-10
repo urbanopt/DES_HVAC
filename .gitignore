@@ -1,0 +1,7 @@
+.idea
+
+# PAT project outputs that should not be pushed to Git.
+**/local_configuration.*
+**/server.pid
+**/data_point/initialize.args
+**/analysis/initialize.args
