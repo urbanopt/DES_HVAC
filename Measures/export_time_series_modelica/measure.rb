@@ -312,8 +312,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       end
 	end 
  else 
-    runner.registerError("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string 'hot' in its name, 
-	and the cooling loop has the string 'chilled' in its name.") 
+    runner.registerWarning("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string provided in the HHW loop name argument in its name, 
+	and the cooling loop has the string provided in the cooling loop name argument in its name.") 
 end 
 
   

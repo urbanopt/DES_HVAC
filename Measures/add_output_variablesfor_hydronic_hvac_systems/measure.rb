@@ -98,7 +98,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
    end 
    
    if selected_plant_loops[1].nil?
-	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that its name includes the word 'hot.'") 
+	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that its name includes the word 'hot' or specify a name in the argument.") 
    end 
    
    if selected_plant_loops[0].nil?
@@ -106,7 +106,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
    end 
    
    if selected_plant_loops.empty?
-       runner.registerError("No plant loops for heating or cooling found, so no output variables have been added. See warning messages for loop 
+       runner.registerWarning("No plant loops for heating or cooling found, so no output variables have been added. See previous warning messages for loop 
 	   naming requirements.") 
    end 
 
