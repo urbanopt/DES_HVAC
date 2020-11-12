@@ -35,8 +35,11 @@
 
 require 'erb'
 
+
 # start the measure
 class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
+  Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
+  include OsLib_HelperMethods
   # human readable name
   def name
     # Measure name should be the title case of the class name.
@@ -53,7 +56,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     'This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
 	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water loop name contains the word "hot" and the chilled water loop name contains the word "chilled" (non-case-sensitive). This measure also assumes that there is a single heating hot water loop
 	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet and inlet nodes for the hot water and chilled water
-	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. '
+	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. Note that this measurele
+    leverages the "get upstream argument values" approach used in other OpenStudio measures, specifically from "Get Site from Building Component Library."'
   end
 
   def log(str)
@@ -62,9 +66,25 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
   def arguments(_model)
     args = OpenStudio::Measure::OSArgumentVector.new
+	
+    hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
+    hhw_loop_name.setDisplayName('Name or Partial Name of Heating Hot Water Loop, non-case-sensitive')
+    hhw_loop_name.setDefaultValue('hot')
+    args << hhw_loop_name
+	
+	chw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('chw_loop_name', true)
+    chw_loop_name.setDisplayName('Name or Partial Name of Chilled Water Loop, non-case-sensitive')
+    chw_loop_name.setDefaultValue('chilled')
+    args << chw_loop_name
 
-    # this measure does not require any user arguments, return an empty list
-    args
+    # make an argument for use_upstream_args
+    use_upstream_args = OpenStudio::Measure::OSArgument.makeBoolArgument('use_upstream_args', true)
+    use_upstream_args.setDisplayName('Use Upstream Argument Values')
+    use_upstream_args.setDescription('When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.')
+    use_upstream_args.setDefaultValue(true)
+    args << use_upstream_args
+
+    return args
   end
 
   # return a vector of IdfObject's to request EnergyPlus objects needed by the run method
@@ -72,6 +92,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     super(runner, user_arguments)
 
     result = OpenStudio::IdfObjectVector.new
+	
 
     # To use the built-in error checking we need the model...
     # get the last model and sql file
@@ -203,7 +224,31 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
     # use the built-in error checking
     return false unless runner.validateUserArguments(arguments(model), user_arguments)
+	
+	args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments(model))
+	if !args then return false end
 
+    # lookup and replace argument values from upstream measures
+    if args['use_upstream_args'] == true
+      args.each do |arg,value|
+        next if arg == 'use_upstream_args' # this argument should not be changed
+        value_from_osw = OsLib_HelperMethods.check_upstream_measure_for_arg(runner, arg)
+        if !value_from_osw.empty?
+          runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
+          new_val = value_from_osw[:value]
+          # todo - make code to handle non strings more robust. check_upstream_measure_for_arg could pass bakc the argument type
+          if arg == 'hhw_loop_name'
+            args[arg] = new_val.to_s
+          elsif arg == 'chw_loop_name'
+            args[arg] = new_val.to_s
+          else
+            args[arg] = new_val
+          end
+        end
+      end
+    end
+    hhw_loop_name = args['hhw_loop_name']
+	chw_loop_name = args['chw_loop_name']
     # get the last model and sql file
     model = runner.lastOpenStudioModel
     if model.empty?
@@ -265,11 +310,11 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	key_var={}
 
     plantloops.each do |plantLoop|
-	  if plantLoop.name.get.to_s.downcase.include? "chilled" 
+	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_str
 	     #Extract plant loop information 
          selected_plant_loops[0]=plantLoop
 	  end 
-	  if plantLoop.name.get.to_s.downcase.include? "hot" 
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name.to_str
          #Get plant loop information
 		 selected_plant_loops[1]=plantLoop
 	  end 
@@ -287,7 +332,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0)
 	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0) 
 	 else 
-		runner.registerWarning("No hot water loop found. If one is expected, make sure the string 'hot' is in its name.") 
+		runner.registerWarning("No hot water loop found. If one is expected, make sure the hot water loop name argument provides a string present in its name.") 
      end 
 	
 	if !selected_plant_loops[0].nil?
@@ -302,8 +347,14 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0) 
 	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0)
 	else 
-	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the string 'chilled' is in its name.") 
+	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the chilled water loop name argument provides a string present in its name.") 
     end 
+	
+   
+   if selected_plant_loops[0].nil? and selected_plant_loops[1].nil?
+    runner.registerWarning("No HVAC plant loops found. If one or more plant loops are expected, make sure they follow the naming conventions mentioned in the previous warnings.") 
+   end 
+   
    if !selected_plant_loops.nil?
     # convert this to CSV object
     File.open('./building_loads.csv', 'w') do |f|
@@ -311,17 +362,14 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
         f << row.join(',') << "\n"
       end
 	end 
- else 
-    runner.registerError("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string 'hot' in its name, 
-	and the cooling loop has the string 'chilled' in its name.") 
-end 
+   end 
 
-  
     true
   ensure
     sqlFile&.close
   end
-end
+  end 
+
 
 # register the measure to be used by the application
 ExportTimeSeriesLoadsCSV.new.registerWithApplication

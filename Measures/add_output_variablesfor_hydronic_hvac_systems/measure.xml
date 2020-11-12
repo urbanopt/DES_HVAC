@@ -3,8 +3,8 @@
   <schema_version>3.0</schema_version>
   <name>add_output_variablesfor_hydronic_hvac_systems</name>
   <uid>19a04a3e-4d42-437f-812d-54aa04f3d98e</uid>
-  <version_id>e6dd59c8-577e-45be-9e5e-4ef7dcd7f506</version_id>
-  <version_modified>20201110T042700Z</version_modified>
+  <version_id>51d26d83-78b8-4405-8658-54a16219bec9</version_id>
+  <version_modified>20201112T044213Z</version_modified>
   <xml_checksum>5DD9ABF6</xml_checksum>
   <class_name>AddOutputVariablesforHydronicHVACSystems</class_name>
   <display_name>Add Output Variables for Hydronic HVAC Systems</display_name>
@@ -111,7 +111,7 @@
       <filename>add_output_variablesfor_hydronic_hvac_systems_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>728E2738</checksum>
+      <checksum>7D8AA5C7</checksum>
     </file>
     <file>
       <version>
@@ -122,7 +122,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>23055965</checksum>
+      <checksum>8688D4F1</checksum>
     </file>
   </files>
 </measure>

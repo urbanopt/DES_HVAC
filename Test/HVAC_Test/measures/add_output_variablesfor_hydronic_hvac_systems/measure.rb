@@ -22,22 +22,35 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   end
 
   # define the arguments that the user will input
-  def arguments(_model)
+  def arguments(model)
     args = OpenStudio::Measure::OSArgumentVector.new
+	
+    hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
+    hhw_loop_name.setDisplayName('Name or Partial Name of Heating Hot Water Loop, non-case-sensitive')
+    hhw_loop_name.setDefaultValue('hot')
+    args << hhw_loop_name
+	
+	chw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('chw_loop_name', true)
+    chw_loop_name.setDisplayName('Name or Partial Name of Chilled Water Loop, non-case-sensitive')
+    chw_loop_name.setDefaultValue('chilled')
+    args << chw_loop_name
 
-    args
+    return args
   end
 
   # define what happens when the measure is run
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)
-
-    # use the built-in error checking
-    # if !runner.validateUserArguments(arguments(model), user_arguments)
-      # return false
-    # end
- 
 	
+    #use the built-in error checking
+    if !runner.validateUserArguments(arguments(model), user_arguments)
+      return false
+    end
+	
+	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
+	chw_loop_name = runner.getStringArgumentValue('chw_loop_name', user_arguments)
+	
+
 	#Identify key names for output variables. 
 	plantloops = model.getPlantLoops
 
@@ -49,7 +62,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
 	reporting_frequency = 'hourly'
 
     plantloops.each do |plantLoop|
-	  if plantLoop.name.get.to_s.downcase.include? "chilled" 
+	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_s
 	     #Extract plant loop information 
          selected_plant_loops[0]=plantLoop
 		 key_value_chw_outlet = selected_plant_loops[0].demandOutletNode.name.to_s
@@ -68,7 +81,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
          outputVariable.setReportingFrequency(reporting_frequency)
 	     outputVariable.setKeyValue(key_value_chw_inlet)
       end 
-	  if plantLoop.name.get.to_s.downcase.include? "hot" 
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name.to_s and !plantLoop.name.get.to_s.downcase.include? "service" and !plantLoop.name.get.to_s.downcase.include? "domestic"
 	     #Extract plant loop information 
 		 selected_plant_loops[1]=plantLoop
 		 key_value_hhw_outlet = selected_plant_loops[1].demandOutletNode.name.to_s
@@ -90,15 +103,15 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
    end 
    
    if selected_plant_loops[1].nil?
-	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that its name includes the word 'hot.'") 
+	  runner.registerWarning("No hot water loop found. If a hot loop should be present, verify that the hot water loop name argument provides a string present in its name.") 
    end 
    
    if selected_plant_loops[0].nil?
-   	     runner.registerWarning("No chilled water loop found. If a chilled water loop should be present, verify that its name includes the word 'chilled.'") 
+   	     runner.registerWarning("No chilled water loop found. If a chilled water loop should be present, verify that the chilled water loop name argument provides a string present in its name.") 
    end 
    
    if selected_plant_loops.empty?
-       runner.registerError("No plant loops for heating or cooling found, so no output variables have been added. See warning messages for loop 
+       runner.registerWarning("No plant loops for heating or cooling found, so no output variables have been added. See previous warning messages for loop 
 	   naming requirements.") 
    end 
 

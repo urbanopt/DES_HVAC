@@ -352,8 +352,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	
    
    if selected_plant_loops[0].nil? and selected_plant_loops[1].nil?
-    runner.registerError("No HVAC plant loops found. If one or more plant loops are expected, make sure the heating loop has the string 'hot' in its name, 
-	and the cooling loop has the string 'chilled' in its name.") 
+    runner.registerWarning("No HVAC plant loops found. If one or more plant loops are expected, make sure they follow the naming conventions mentioned in the previous warnings.") 
    end 
    
    if !selected_plant_loops.nil?

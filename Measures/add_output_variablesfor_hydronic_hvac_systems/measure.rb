@@ -42,14 +42,14 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)
 	
-	#use the built-in error checking
+    #use the built-in error checking
     if !runner.validateUserArguments(arguments(model), user_arguments)
       return false
     end
 	
-	
 	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
 	chw_loop_name = runner.getStringArgumentValue('chw_loop_name', user_arguments)
+	
 
 	#Identify key names for output variables. 
 	plantloops = model.getPlantLoops
@@ -111,7 +111,7 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
    end 
    
    if selected_plant_loops.empty?
-       runner.registerError("No plant loops for heating or cooling found, so no output variables have been added. See warning messages for loop 
+       runner.registerWarning("No plant loops for heating or cooling found, so no output variables have been added. See previous warning messages for loop 
 	   naming requirements.") 
    end 
 

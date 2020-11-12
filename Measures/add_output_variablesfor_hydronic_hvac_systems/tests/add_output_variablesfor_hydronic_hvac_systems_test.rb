@@ -48,7 +48,7 @@ class AddOutputVariablesforHydronicHVACSystemsTest < Minitest::Test
 
     # create hash of argument values
     args_hash = {}
-    args_hash['space_name'] = ''
+    args_hash['space_type'] = ''
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -67,7 +67,8 @@ class AddOutputVariablesforHydronicHVACSystemsTest < Minitest::Test
     show_output(result)
 
     # assert that it ran correctly
-    assert_equal('Fail', result.value.valueName)
+    #assert_equal('Fail', result.value.valueName)
+	assert_equal(3, result.warnings.size) #measure does not generate errors for missing loop name arguments, but will generate warnings
   end
 
   def test_good_argument_values

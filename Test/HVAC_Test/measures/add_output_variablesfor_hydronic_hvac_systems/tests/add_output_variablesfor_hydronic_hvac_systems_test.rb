@@ -22,53 +22,54 @@ class AddOutputVariablesforHydronicHVACSystemsTest < Minitest::Test
 
     # get arguments and test that they are what we are expecting
     arguments = measure.arguments(model)
-    assert_equal(0, arguments.size)
+    assert_equal(2, arguments.size)
     #assert_equal('space_name', arguments[0].name)
   end
 
-  # def test_bad_argument_values
-    # # create an instance of the measure
-    # measure = AddOutputVariablesforHydronicHVACSystems.new
+  def test_bad_argument_values
+    # create an instance of the measure
+    measure = AddOutputVariablesforHydronicHVACSystems.new
 
-    # # create runner with empty OSW
-    # osw = OpenStudio::WorkflowJSON.new
-    # runner = OpenStudio::Measure::OSRunner.new(osw)
+    # create runner with empty OSW
+    osw = OpenStudio::WorkflowJSON.new
+    runner = OpenStudio::Measure::OSRunner.new(osw)
 
-    # # make an empty model
-	# translator = OpenStudio::OSVersion::VersionTranslator.new
+    # make an empty model
+	translator = OpenStudio::OSVersion::VersionTranslator.new
     # path = "#{File.dirname(__FILE__)}/example_model.osm"
     # model = translator.loadModel(path)
 	# assert(!model.empty?)
-    # model = model.get
-    # # model = OpenStudio::Model::Model.new
+    #model = model.get
+    model = OpenStudio::Model::Model.new
 
-    # # get arguments
-    # arguments = measure.arguments(model)
-    # argument_map = OpenStudio::Measure.convertOSArgumentVectorToMap(arguments)
+    # get arguments
+    arguments = measure.arguments(model)
+    argument_map = OpenStudio::Measure.convertOSArgumentVectorToMap(arguments)
 
-    # # create hash of argument values
-    # args_hash = {}
-    # args_hash['space_name'] = ''
+    # create hash of argument values
+    args_hash = {}
+    args_hash['space_type'] = ''
 
-    # # populate argument with specified hash value if specified
-    # arguments.each do |arg|
-      # temp_arg_var = arg.clone
-      # if args_hash.key?(arg.name)
-        # assert(temp_arg_var.setValue(args_hash[arg.name]))
-      # end
-      # argument_map[arg.name] = temp_arg_var
-    # end
+    # populate argument with specified hash value if specified
+    arguments.each do |arg|
+      temp_arg_var = arg.clone
+      if args_hash.key?(arg.name)
+        assert(temp_arg_var.setValue(args_hash[arg.name]))
+      end
+      argument_map[arg.name] = temp_arg_var
+    end
 
-    # # run the measure
-    # measure.run(model, runner, argument_map)
-    # result = runner.result
+    # run the measure
+    measure.run(model, runner, argument_map)
+    result = runner.result
 
-    # # show the output
-    # show_output(result)
+    # show the output
+    show_output(result)
 
-    # # assert that it ran correctly
-    # assert_equal('Fail', result.value.valueName)
-  # end
+    # assert that it ran correctly
+    #assert_equal('Fail', result.value.valueName)
+	assert_equal(3, result.warnings.size) #measure does not generate errors for missing loop name arguments, but will generate warnings
+  end
 
   def test_good_argument_values
     # create an instance of the measure
