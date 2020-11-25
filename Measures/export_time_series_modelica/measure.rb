@@ -110,6 +110,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Outdoor Air Drybulb Temperature,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Outdoor Air Relative Humidity,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,Cooling:Electricity,hourly;').get
+	result << OpenStudio::IdfObject.load('Output:Meter,Cooling:Electricity,timestep;').get ##AA added this 
     result << OpenStudio::IdfObject.load('Output:Meter,Heating:Electricity,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,Heating:Gas,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,InteriorLights:Electricity,hourly;').get
@@ -132,12 +133,12 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     #column_name = variable_name
     if key_value
       #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name, key_value) ##AA modified 11/24
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', variable_name, key_value) ##AA modified this from zone timestep 11/24
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name, key_value) ##AA modified this from zone timestep 11/24
       #column_name += "_#{key_value}"
 	  column_name=str
     else
       #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name)
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', variable_name) ##AA modified this from zone timestep 11/24
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name) ##AA modified this from zone timestep 11/24
     end
     log 'Iterating over timeseries'
     column = [column_name.delete(':').delete(' ')] # Set the header of the data to the variable name, removing : and spaces
@@ -280,10 +281,13 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     ]
 
     # just grab one of the variables to get the date/time stamps
-    #ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity') ##AA the line below could be causing the minute problem ##AA uncommented this, 11/24
+    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity') ##AA the line below could be causing the minute problem ##AA uncommented this, 11/24
     #ts = sqlFile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', 'Cooling:Electricity') ##AA commented out all of these lines 11/24
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
-    unless ts.empty?
+	if ts.empty? ##AA added this check
+	    log "cooling elec meter time series empty" 
+    end 
+	unless ts.empty? ##AA commented out this block for now to deal with the date column later 
       ts = ts.first
       dt_base = nil
       # Save off the date time values

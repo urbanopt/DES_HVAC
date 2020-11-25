@@ -61,8 +61,9 @@ class AddOutputVariablesforHydronicHVACSystems < OpenStudio::Measure::ModelMeasu
 	variable_name2 = 'System Node Temperature'
 	#reporting_frequency = 'hourly' ##need to make this match the timestep in the model 
 	#runner.registerInfo("timestep is #{model.getTimestep}") #Remove after debugging
-	reporting_frequency = 'detailed' ##AA added 11/24
-
+	reporting_frequency = 'timestep' ##AA added 11/24 #this didnt seem to work with zone timestep in the other measure
+    #reporting_frequency = 'detailed' ##this didnt work wiht zone timestep in the other measuer 
+	
     plantloops.each do |plantLoop|
 	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_s
 	     #Extract plant loop information 
