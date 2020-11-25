@@ -131,13 +131,13 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     log "Executing query for #{variable_name}"
     #column_name = variable_name
     if key_value
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name, key_value)
-      # ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name, key_value)
+      #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name, key_value) ##AA modified 11/24
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', variable_name, key_value) ##AA modified this from zone timestep 11/24
       #column_name += "_#{key_value}"
 	  column_name=str
     else
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name)
-      # ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name)
+      #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name)
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', variable_name) ##AA modified this from zone timestep 11/24
     end
     log 'Iterating over timeseries'
     column = [column_name.delete(':').delete(' ')] # Set the header of the data to the variable name, removing : and spaces
@@ -280,8 +280,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     ]
 
     # just grab one of the variables to get the date/time stamps
-    # ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
-    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
+    #ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity') ##AA the line below could be causing the minute problem ##AA uncommented this, 11/24
+    #ts = sqlFile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', 'Cooling:Electricity') ##AA commented out all of these lines 11/24
+	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
     unless ts.empty?
       ts = ts.first
       dt_base = nil
