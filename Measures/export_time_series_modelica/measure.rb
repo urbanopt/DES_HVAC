@@ -110,7 +110,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Outdoor Air Drybulb Temperature,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Outdoor Air Relative Humidity,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,Cooling:Electricity,hourly;').get
-	result << OpenStudio::IdfObject.load('Output:Meter,Cooling:Electricity,timestep;').get ##AA added this 
+	result << OpenStudio::IdfObject.load('Output:Meter,Cooling:Electricity,timestep;').get ##Using this for data at timestep interval 
     result << OpenStudio::IdfObject.load('Output:Meter,Heating:Electricity,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,Heating:Gas,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Meter,InteriorLights:Electricity,hourly;').get
@@ -128,17 +128,17 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result
   end
 
-  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0) #, digits_to_round=2)
+  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0,dec_places=2) #, digits_to_round=2)
     log "Executing query for #{variable_name}"
     #column_name = variable_name
     if key_value
-      #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name, key_value) ##AA modified 11/24
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name, key_value) ##AA modified this from zone timestep 11/24
+      #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name, key_value) 
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name, key_value) 
       #column_name += "_#{key_value}"
 	  column_name=str
     else
       #ts = sqlfile.timeSeries('RUN PERIOD 1', 'Hourly', variable_name)
-      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name) ##AA modified this from zone timestep 11/24
+      ts = sqlfile.timeSeries('RUN PERIOD 1', 'Zone Timestep', variable_name) 
     end
     log 'Iterating over timeseries'
     column = [column_name.delete(':').delete(' ')] # Set the header of the data to the variable name, removing : and spaces
@@ -149,10 +149,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       column += [default_if_empty] * (data.size - 1)
     else
       ts = ts.get if ts.respond_to?(:get)
-	  #ts_new = ts.get if ts.respond_to?(:get) ##AA modified 11/26 to add rounding 
       ts = ts.first if ts.respond_to?(:first)
-	  #ts_new = ts.first if ts.respond_to?(:first) ##AA modified 11/26 to add rounding
-	  #ts=ts_new.round(1) ##AA modified this 11/26 to add rounding 
 	  
       start = Time.now
       # Iterating in OpenStudio can take up to 60 seconds with 10min data. The quick_proc takes 0.03 seconds.
@@ -161,26 +158,20 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       #   column << ts.values[i]
       # end
 
-      log "the ts.values class is #{ts.values.class}"
-      ##AA added 11/26
+      quick_proc = ts.values.to_s.split(',')
+	  quick_proc=quick_proc.map(&:to_f)
 	  x = 0
-      len = ts.values.length
-      while(x < len)
-          ts.values[x]=(ts.values[x]).round(2)
-		  log "rounded value #{ts.values[x]}"
+      len = quick_proc.length
+      while(x < len) #Round to the # of decimal places specified 
+          quick_proc[x]=(quick_proc[x]).round(dec_places)
+		  log "rounded value #{quick_proc[x]}"
           x=x+1
 	  end 
-	  ## end of what AA added 
-	  #ts.values.round(1) ##AA added this 
-      quick_proc = ts.values.to_s.split(',')
-	  #quick_proc =quick_proc.round(1) ##AA added this for rounding 
+	  quick_proc=quick_proc.map(&:to_s)
 
       # the first and last have some cleanup items because of the Vector method
       quick_proc[0] = quick_proc[0].gsub(/^.*\(/, '')
       quick_proc[-1] = quick_proc[-1].delete(')')
-	  ##AA added this chunk 11/26
-	  log "quick_proc class is #{quick_proc.class}"
-       ##end of AA addition 
       column += quick_proc
 	  
 	  
@@ -301,13 +292,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     ]
 
     # just grab one of the variables to get the date/time stamps
-    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity') ##AA the line below could be causing the minute problem ##AA uncommented this, 11/24
+    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
     runner.registerInfo("the type of the ts is #{ts.class}") 
-	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', 'Cooling:Electricity') ##AA commented out all of these lines 11/24
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
-	if ts.empty? ##AA added this check
-	    log "cooling elec meter time series empty" 
-    end 
 	unless ts.empty? 
       ts = ts.first
       dt_base = nil
@@ -354,9 +341,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['hhw_outlet_temp']='heatingReturnTemperature[C]'
 	 key_var['hhw_inlet_temp']='heatingSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0, 1) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0, 1)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0, 3) 
 	 else 
 		runner.registerWarning("No hot water loop found. If one is expected, make sure the hot water loop name argument provides a string present in its name.") 
      end 
@@ -369,9 +356,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['chw_outlet_temp']='ChilledWaterReturnTemperature[C]'
 	 key_var['chw_inlet_temp']='ChilledWaterSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0, 1)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0, 1) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0, 3)
 	else 
 	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the chilled water loop name argument provides a string present in its name.") 
     end 
