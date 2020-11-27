@@ -128,7 +128,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result
   end
 
-  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0)
+  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0) #, digits_to_round=2)
     log "Executing query for #{variable_name}"
     #column_name = variable_name
     if key_value
@@ -149,8 +149,11 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       column += [default_if_empty] * (data.size - 1)
     else
       ts = ts.get if ts.respond_to?(:get)
+	  #ts_new = ts.get if ts.respond_to?(:get) ##AA modified 11/26 to add rounding 
       ts = ts.first if ts.respond_to?(:first)
-
+	  #ts_new = ts.first if ts.respond_to?(:first) ##AA modified 11/26 to add rounding
+	  #ts=ts_new.round(1) ##AA modified this 11/26 to add rounding 
+	  
       start = Time.now
       # Iterating in OpenStudio can take up to 60 seconds with 10min data. The quick_proc takes 0.03 seconds.
       # for i in 0..ts.values.size - 1
@@ -158,12 +161,29 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       #   column << ts.values[i]
       # end
 
+      log "the ts.values class is #{ts.values.class}"
+      ##AA added 11/26
+	  x = 0
+      len = ts.values.length
+      while(x < len)
+          ts.values[x]=(ts.values[x]).round(2)
+		  log "rounded value #{ts.values[x]}"
+          x=x+1
+	  end 
+	  ## end of what AA added 
+	  #ts.values.round(1) ##AA added this 
       quick_proc = ts.values.to_s.split(',')
+	  #quick_proc =quick_proc.round(1) ##AA added this for rounding 
 
       # the first and last have some cleanup items because of the Vector method
       quick_proc[0] = quick_proc[0].gsub(/^.*\(/, '')
       quick_proc[-1] = quick_proc[-1].delete(')')
+	  ##AA added this chunk 11/26
+	  log "quick_proc class is #{quick_proc.class}"
+       ##end of AA addition 
       column += quick_proc
+	  
+	  
 
       log "Took #{Time.now - start} to iterate"
     end
@@ -282,12 +302,13 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
     # just grab one of the variables to get the date/time stamps
     ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity') ##AA the line below could be causing the minute problem ##AA uncommented this, 11/24
-    #ts = sqlFile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', 'Cooling:Electricity') ##AA commented out all of these lines 11/24
+    runner.registerInfo("the type of the ts is #{ts.class}") 
+	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'HVAC System Timestep', 'Cooling:Electricity') ##AA commented out all of these lines 11/24
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
 	if ts.empty? ##AA added this check
 	    log "cooling elec meter time series empty" 
     end 
-	unless ts.empty? ##AA commented out this block for now to deal with the date column later 
+	unless ts.empty? 
       ts = ts.first
       dt_base = nil
       # Save off the date time values
