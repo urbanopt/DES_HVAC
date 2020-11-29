@@ -5,9 +5,7 @@
 # ExportTimeSeriesLoadsCSV
 
 ## Description
-This measure will create a CSV file with plant loop level mass flow rates and temperatures for use in a Modelica simulation. Note that this measure has certain
-	 requirements for naming of hydronic loops (discussed in the modeler description section) and requires that certain output variables be present in the model. These
-	 output variables can be added with the Add Output Variables for Hydronic HVAC Systems measure.
+This measure will create a CSV file with plant loop level mass flow rates and temperatures for use in a Modelica simulation. Note that this measure has certain requirements for naming of hydronic loops (discussed in the modeler description section) and requires that certain output variables be present in the model. These output variables can be added with the Add Output Variables for Hydronic HVAC Systems measure. The output variables are reported at the simulation timestep. 
 
 ## Modeler Description
 This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
@@ -48,6 +46,24 @@ When true this will look for arguments or registerValues in upstream measures th
 **Units:** ,
 **Required:** true,
 **Model Dependent:** false
+
+### Decimal Places to Round Mass Flow Rate
+This argument specifies the number of decimal places to which the mass flow rate time serieses will be rounded. The default value is 3. 
+**Name:**  dec_places_mass_flow, 
+**Type:** Integer
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
+
+### Decimal Places to Round Temperature
+This argument specifies the number of decimal places to which the temperature time serieses will be rounded. The default value is 1.  
+**Name:**  dec_places_temp
+**Type:** Integer
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
+
+
 
 
 
