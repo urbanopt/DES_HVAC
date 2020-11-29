@@ -76,6 +76,19 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     chw_loop_name.setDisplayName('Name or Partial Name of Chilled Water Loop, non-case-sensitive')
     chw_loop_name.setDefaultValue('chilled')
     args << chw_loop_name
+	
+	dec_places_mass_flow = OpenStudio::Measure::OSArgument.makeIntegerArgument('dec_places_mass_flow', true)
+    dec_places_mass_flow.setDisplayName('Number of Decimal Places to Round Mass Flow Rate')
+    dec_places_mass_flow.setDescription('Number of decimal places to which mass flow rate will be rounded')
+    dec_places_mass_flow.setDefaultValue(3)
+    args << dec_places_mass_flow
+	
+    dec_places_temp = OpenStudio::Measure::OSArgument.makeIntegerArgument('dec_places_temp', true)
+    dec_places_temp.setDisplayName('Number of Decimal Places to Round Temperature')
+    dec_places_temp.setDescription('Number of decimal places to which temperature will be rounded')
+    dec_places_temp.setDefaultValue(1)
+    args << dec_places_temp
+
 
     # make an argument for use_upstream_args
     use_upstream_args = OpenStudio::Measure::OSArgument.makeBoolArgument('use_upstream_args', true)
@@ -128,7 +141,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result
   end
 
-  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0,dec_places=2) #, digits_to_round=2)
+  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0,dec_places=2) 
     log "Executing query for #{variable_name}"
     #column_name = variable_name
     if key_value
@@ -261,6 +274,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     end
     hhw_loop_name = args['hhw_loop_name']
 	chw_loop_name = args['chw_loop_name']
+	dec_places_temp = args['dec_places_temp']
+	dec_places_mass_flow = args['dec_places_mass_flow']
     # get the last model and sql file
     model = runner.lastOpenStudioModel
     if model.empty?
@@ -341,9 +356,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['hhw_outlet_temp']='heatingReturnTemperature[C]'
 	 key_var['hhw_inlet_temp']='heatingSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0, 1) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0, 1)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0, 3) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0, dec_places_temp) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0, dec_places_temp)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0, dec_places_mass_flow) 
 	 else 
 		runner.registerWarning("No hot water loop found. If one is expected, make sure the hot water loop name argument provides a string present in its name.") 
      end 
@@ -356,9 +371,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['chw_outlet_temp']='ChilledWaterReturnTemperature[C]'
 	 key_var['chw_inlet_temp']='ChilledWaterSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0, 1)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0, 1) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0, 3)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0, dec_places_temp)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0, dec_places_temp) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0, dec_places_mass_flow)
 	else 
 	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the chilled water loop name argument provides a string present in its name.") 
     end 

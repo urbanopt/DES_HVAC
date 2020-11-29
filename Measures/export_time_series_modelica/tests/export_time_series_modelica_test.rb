@@ -99,7 +99,7 @@ class ExportTimeSeriesModelicaTest < Minitest::Test
 
     # get arguments and test that they are what we are expecting
     arguments = measure.arguments(model)
-    assert_equal(3, arguments.size)
+    assert_equal(5, arguments.size)
   end
 
   def test_good_argument_values
