@@ -64,7 +64,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     puts "#{Time.now}: #{str}"
   end
 
-  def arguments(_model)
+  def arguments(_model) 
     args = OpenStudio::Measure::OSArgumentVector.new
 	
     hhw_loop_name = OpenStudio::Measure::OSArgument.makeStringArgument('hhw_loop_name', true)
@@ -141,7 +141,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     result
   end
 
-  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0,dec_places=2) 
+  def extract_timeseries_into_matrix(sqlfile, data, variable_name, str, key_value = nil, default_if_empty = 0,dec_places, timestep) 
     log "Executing query for #{variable_name}"
     #column_name = variable_name
     if key_value
@@ -284,7 +284,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     end
     model = model.get
 	
-	
+
+	timesteps_per_hour=model.getTimestep.numberOfTimestepsPerHour.to_i
+	timestep=60/timesteps_per_hour #timestep in minutes 
 
     sqlFile = runner.lastEnergyPlusSqlFile
     if sqlFile.empty?
@@ -308,28 +310,22 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
     # just grab one of the variables to get the date/time stamps
     ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
-    runner.registerInfo("the type of the ts is #{ts.class}") 
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
 	unless ts.empty? 
       ts = ts.first
       dt_base = nil
       # Save off the date time values
       ts.dateTimes.each_with_index do |dt, index|
-        #runner.registerInfo("My index is #{index}")
-	    runner.registerInfo("minutes 3 #{dt.time.minutes[3]}")
-		runner.registerInfo("minutes 1 #{dt.time.minutes[1]}") 
         dt_base = DateTime.parse(dt.to_s) if dt_base.nil?
         dt_current = DateTime.parse(dt.to_s)
         rows << [
           DateTime.parse(dt.to_s).strftime('%m/%d/%Y %H:%M'),
-		  #DateTime.parse(dt.to_s).strftime('%m/%d/%Y %H:%M:%S'),
           dt.date.monthOfYear.value,
           dt.date.dayOfMonth,
           dt.date.dayOfWeek.value,
           dt.time.hours,
           dt.time.minutes,
-		  #dt.time.seconds
-          dt_current.to_time.to_i - dt_base.to_time.to_i #+ (dt.time.minutes[3]-dt.time.minutes[1])*60  ##modified to start at 0 
+          dt_current.to_time.to_i - dt_base.to_time.to_i + timestep*60 
         ]
       end
     end
@@ -360,9 +356,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['hhw_outlet_temp']='heatingReturnTemperature[C]'
 	 key_var['hhw_inlet_temp']='heatingSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0, dec_places_temp) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0, dec_places_temp)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0, dec_places_mass_flow) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_outlet_temp'], key_value_hhw_outlet, 0, dec_places_temp, timestep) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['hhw_inlet_temp'], key_value_hhw_inlet, 0, dec_places_temp, timestep)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['hhw_outlet_massflow'], key_value_hhw_outlet, 0, dec_places_mass_flow, timestep) 
 	 else 
 		runner.registerWarning("No hot water loop found. If one is expected, make sure the hot water loop name argument provides a string present in its name.") 
      end 
@@ -375,9 +371,9 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 	 key_var['chw_outlet_temp']='ChilledWaterReturnTemperature[C]'
 	 key_var['chw_inlet_temp']='ChilledWaterSupplyTemperature[C]'
 	 #Extract time series 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0, dec_places_temp)
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0, dec_places_temp) 
-	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0, dec_places_mass_flow)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_outlet_temp'], key_value_chw_outlet, 0, dec_places_temp,timestep)
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Temperature', key_var['chw_inlet_temp'], key_value_chw_inlet, 0, dec_places_temp,timestep) 
+	 extract_timeseries_into_matrix(sqlFile, rows, 'System Node Mass Flow Rate', key_var['chw_outlet_massflow'], key_value_chw_outlet, 0, dec_places_mass_flow,timestep)
 	else 
 	     runner.registerWarning("No chilled water loop found. If one is expected, make sure the chilled water loop name argument provides a string present in its name.") 
     end 
