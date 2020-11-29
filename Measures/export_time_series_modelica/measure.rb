@@ -316,16 +316,20 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       # Save off the date time values
       ts.dateTimes.each_with_index do |dt, index|
         #runner.registerInfo("My index is #{index}")
+	    runner.registerInfo("minutes 3 #{dt.time.minutes[3]}")
+		runner.registerInfo("minutes 1 #{dt.time.minutes[1]}") 
         dt_base = DateTime.parse(dt.to_s) if dt_base.nil?
         dt_current = DateTime.parse(dt.to_s)
         rows << [
           DateTime.parse(dt.to_s).strftime('%m/%d/%Y %H:%M'),
+		  #DateTime.parse(dt.to_s).strftime('%m/%d/%Y %H:%M:%S'),
           dt.date.monthOfYear.value,
           dt.date.dayOfMonth,
           dt.date.dayOfWeek.value,
           dt.time.hours,
           dt.time.minutes,
-          dt_current.to_time.to_i - dt_base.to_time.to_i
+		  #dt.time.seconds
+          dt_current.to_time.to_i - dt_base.to_time.to_i #+ (dt.time.minutes[3]-dt.time.minutes[1])*60  ##modified to start at 0 
         ]
       end
     end
