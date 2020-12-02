@@ -172,19 +172,21 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
       # end
 
       quick_proc = ts.values.to_s.split(',')
-	  quick_proc=quick_proc.map(&:to_f)
+	  quick_proc[0]=quick_proc[0].split('(', 2).last #cleanup necessary to remove opening paren 
+	  quick_proc=quick_proc.map(&:to_f) 
 	  x = 0
       len = quick_proc.length
+	  log "quick proc #{quick_proc}" 
       while(x < len) #Round to the # of decimal places specified 
           quick_proc[x]=(quick_proc[x]).round(dec_places)
-		  log "rounded value #{quick_proc[x]}"
           x=x+1
 	  end 
 	  quick_proc=quick_proc.map(&:to_s)
 
+	  
       # the first and last have some cleanup items because of the Vector method
-      quick_proc[0] = quick_proc[0].gsub(/^.*\(/, '')
-      quick_proc[-1] = quick_proc[-1].delete(')')
+      quick_proc[0] = quick_proc[0].gsub(/^.*\(/, '') 
+      quick_proc[-1] = quick_proc[-1].delete(')') 
       column += quick_proc
 	  
 	  
@@ -311,7 +313,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     # just grab one of the variables to get the date/time stamps
     ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
-	unless ts.empty? 
+	unless ts.empty? ##AA commented this out
       ts = ts.first
       dt_base = nil
       # Save off the date time values
