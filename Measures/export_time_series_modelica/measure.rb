@@ -47,17 +47,14 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
   end
 
   def description
-    'This measure will create a CSV file with plant loop level mass flow rates and temperatures for use in a Modelica simulation. Note that this measure has certain
-	 requirements for naming of hydronic loops (discussed in the modeler description section) and requires that certain output variables be present in the model. These
-	 output variables can be added with the Add Output Variables for Hydronic HVAC Systems measure.'
+    'This measure will add the required output variables and create a CSV file with plant loop level mass flow rates and temperatures for use in a Modelica simulation. Note that this measure has certain
+	 requirements for naming of hydronic loops (discussed in the modeler description section).'
   end
 
   def modeler_description
-    'This measure is currently configured to output the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops. These loads represent the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
-	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water loop name contains the word "hot" and the chilled water loop name contains the word "chilled" (non-case-sensitive). This measure also assumes that there is a single heating hot water loop
-	and a single chilled-water loop per building. This measure requires that output variables for mass flow rate and temperature at the demand outlet and inlet nodes for the hot water and chilled water
-	loops be present in the model. These output variables can be added through the use of the Add Output Variables for Hydronic HVAC Systems measure. This measure will be adapted in the future to be more generic. Note that this measurele
-    leverages the "get upstream argument values" approach used in other OpenStudio measures, specifically from "Get Site from Building Component Library."'
+    'This measure is currently configured to report the temperatures and mass flow rates at the demand outlet and inlet nodes of hot water and chilled water loops, after adding the required output variables to the model. These values can be used to calculate the sum of the demand-side loads, and could thus represent the load on a connection to a district thermal energy system, or on
+	building-level primary equipment. This measure assumes that the model includes hydronic HVAC loops, and that the hot water and chilled water loop names can each be uniquely identified by a user-provided string. This measure also assumes that there is a single heating hot water loop
+	and a single chilled-water loop per building.'
   end
 
   def log(str)
@@ -89,14 +86,6 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     dec_places_temp.setDefaultValue(1)
     args << dec_places_temp
 
-
-    # make an argument for use_upstream_args
-    use_upstream_args = OpenStudio::Measure::OSArgument.makeBoolArgument('use_upstream_args', true)
-    use_upstream_args.setDisplayName('Use Upstream Argument Values')
-    use_upstream_args.setDescription('When true this will look for arguments or registerValues in upstream measures that match arguments from this measure, and will use the value from the upstream measure in place of what is entered for this measure.')
-    use_upstream_args.setDefaultValue(true)
-    args << use_upstream_args
-
     return args
   end
 
@@ -118,6 +107,45 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
 
     # use the built-in error checking
     return false unless runner.validateUserArguments(arguments(model), user_arguments)
+	
+	##Read in argumetns related to variables for output requests 
+	hhw_loop_name = runner.getStringArgumentValue('hhw_loop_name', user_arguments)
+	chw_loop_name = runner.getStringArgumentValue('chw_loop_name', user_arguments)
+	
+
+	#Identify key names for output variables. 
+	plantloops = model.getPlantLoops
+
+    selected_plant_loops = []
+    i = 0
+	
+	variable_name1 = 'System Node Mass Flow Rate'
+	variable_name2 = 'System Node Temperature'
+	reporting_frequency = 'timestep' 
+
+	
+    plantloops.each do |plantLoop|
+	  log "plant loop name #{plantLoop.name.get.to_s}"
+	  if plantLoop.name.get.to_s.downcase.include? chw_loop_name.to_s
+	     #Extract plant loop information 
+         selected_plant_loops[0]=plantLoop
+		 key_value_chw_outlet = selected_plant_loops[0].demandOutletNode.name.to_s
+	     key_value_chw_inlet = selected_plant_loops[0].demandInletNode.name.to_s
+		 result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_chw_outlet},#{variable_name2},timestep;").get 
+		 result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_chw_inlet},#{variable_name2},timestep;").get 
+         result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_chw_outlet},#{variable_name1},timestep;").get 
+      end 
+	  if plantLoop.name.get.to_s.downcase.include? hhw_loop_name.to_s and !plantLoop.name.get.to_s.downcase.include? "service" and !plantLoop.name.get.to_s.downcase.include? "domestic"
+	     #Extract plant loop information 
+		 selected_plant_loops[1]=plantLoop
+		 key_value_hhw_outlet = selected_plant_loops[1].demandOutletNode.name.to_s
+	     key_value_hhw_inlet = selected_plant_loops[1].demandInletNode.name.to_s
+		 result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_hhw_outlet},#{variable_name2},timestep;").get 
+		 result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_hhw_inlet},#{variable_name2},timestep;").get 
+         result << OpenStudio::IdfObject.load("Output:Variable,#{key_value_hhw_outlet},#{variable_name1},timestep;").get 
+     end 
+   end 
+   
 
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Mains Water Temperature,hourly;').get
     result << OpenStudio::IdfObject.load('Output:Variable,,Site Outdoor Air Drybulb Temperature,hourly;').get
@@ -313,7 +341,7 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     # just grab one of the variables to get the date/time stamps
     ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
 	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
-	unless ts.empty? ##AA commented this out
+	unless ts.empty? 
       ts = ts.first
       dt_base = nil
       # Save off the date time values
