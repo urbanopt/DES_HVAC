@@ -339,8 +339,8 @@ class ExportTimeSeriesLoadsCSV < OpenStudio::Measure::ReportingMeasure
     ]
 
     # just grab one of the variables to get the date/time stamps
-    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Cooling:Electricity')
-	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Cooling:Electricity')
+    ts = sqlFile.timeSeries('RUN PERIOD 1', 'Zone Timestep', 'Electricity:Facility') ##Updated this to make sure the serires is present 
+	#ts = sqlFile.timeSeries('RUN PERIOD 1', 'Hourly', 'Electricity:Facility')
 	unless ts.empty? 
       ts = ts.first
       dt_base = nil
